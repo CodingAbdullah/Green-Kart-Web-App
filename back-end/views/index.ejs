@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+    <title>HomePage</title>
+</head>
+<body>
+    <h1 style="color: red;"><%=errorMessage %></h1>
+    <form action="/form" method="POST">
+        <label>First Name</label>
+        <input type="text" name="firstname" placeholder="First Name"/><br />
+        
+        <label>Last Name</label>
+        <input type="text" name="lastname" placeholder="Last Name"/><br />
+
+        <label>Age</label>
+        <input type="number" id="tentacles" name="age" placeholder="0" min="1" max="120"><br />
+
+        <label>Email</label>
+        <input id="emailAddress" name="email" placeholder="Email" type="email"><br />
+
+        <label>Password</label>
+        <input id="password" name="password" placeholder="Password" type="password"><br />
+
+        <label>Gender (<i>lower case values</i>)</label>
+        <input id="gender" name="gender" placeholder="Gender" type="text"><br />
+
+        <label>Address</label>
+        <input id="address" name="address" placeholder="Address" type="text"><br />
+
+        <input type="submit" name="submit" />
+    </form>
+</body>
+</html>
