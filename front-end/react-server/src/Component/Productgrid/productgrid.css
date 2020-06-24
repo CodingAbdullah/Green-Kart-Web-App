@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+
+.inventory-title {
+    color: white;
+    font-family: 'Permanent Marker', 'cursive';
+    text-align: left;
+    margin-top: 30px;
+}
+
+.price-title {
+    font-family: 'Kalam', 'cursive';
+}
+
+.col-centered {
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+  }
