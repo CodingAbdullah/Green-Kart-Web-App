@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+
+.footerSection {
+    margin-top: 25px;
+}
+
 .footer {
     width: 50%;
     margin-right: auto;

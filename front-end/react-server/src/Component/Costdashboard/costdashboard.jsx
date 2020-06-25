@@ -6,7 +6,6 @@ const Costdashboard = (props) => {
     return (
         <div className="cost-dash-board bg-success">
             <div className="container">
-                <h4 className="cost-dash-board-title">Cost Dashboard</h4>
                 <label className="cost-label">Total Cost: ${props.cost}</label><br />
                 <label className="cost-label">Total Items: {props.quantity}</label><br />
                 <label className="cost-label"> Total Unique Items: {props.uniqueItems}</label><br />
