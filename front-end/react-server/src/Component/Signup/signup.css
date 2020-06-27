@@ -21,7 +21,7 @@
     text-align: center;
 }
 
-.container {
+.sign-up-container {
     margin-top: 50px;
     margin-bottom: 50px;
     width: 50%;
@@ -29,7 +29,7 @@
     border: 5px solid green;
 }
 
-.container:hover {
+.sign-up-container:hover {
     background-color: greenyellow;
 }
 

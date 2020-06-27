@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Productcard from '../Productcard/productcard';
-import Navbar from '../Navbar/navbar';
 import Footer from '../Footer/footer';
 import './productgrid.css';
 import Costdashboard from '../Costdashboard/costdashboard';
@@ -87,7 +86,6 @@ class Productgrid extends Component {
     render() {
         return (
             <div className="product-grid col-centered">
-                <Navbar />
                 <div className="container">
                     <h5 className="inventory-title">Inventory (Maximum five per item)</h5>
                     <div className="row mx-auto">

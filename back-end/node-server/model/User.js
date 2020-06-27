@@ -1,33 +1,35 @@
-const dotenv = require("dotenv").config({path: '../.env'});
-const db = require("../util/database");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-module.exports = class User {
-    constructor(first_name, last_name, age, gender, email, password, address){
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.age = age;
-        this.gender = gender;
-        this.email = email;
-        this.password = password;
-        this.address = address;
+const User = new Schema({
+    first_name : {
+        required: true,
+        type: String
+    },
+    last_name : {
+        required: true,
+        type: String
+    },
+    age : {
+        required: true,
+        type: Number
+    },
+    email : {
+        required: true,
+        type: String
+    },
+    password : {
+        required: true,
+        type: String
+    },
+    address : {
+        required: true,
+        type: String
+    },
+    gender : {
+        required: true,
+        type: String
     }
+});
 
-    save = () => {
-
-        var sql = "INSERT INTO greenKart.User (first_name, last_name, age, gender, email, password, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        return db.execute(sql, [this.first_name, this.last_name, this.age, this.gender, this.email, this.password, this.address]);
-    }
-
-    static fetchByEmail = (email) => {
-
-    
-    }
-
-    fetchById = (id) => {
-
-    }
-
-    fetchAll = () => {
-
-    }
-}
+module.exports = mongoose.model("User", User);

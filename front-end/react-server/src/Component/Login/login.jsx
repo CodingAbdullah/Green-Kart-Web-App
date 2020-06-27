@@ -5,7 +5,7 @@ const Login = () => {
 
     return (
         <div className="login-form">
-            <div class="container">
+            <div class="container login-container">
                 <h4 class="login-form-title">Login Form</h4>
                 <form class="form" method="POST">
                     <div class="form-element text-center">

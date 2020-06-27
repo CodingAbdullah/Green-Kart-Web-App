@@ -5,7 +5,7 @@ const Signup = () => {
 
     return (
         <div className="signup-form">
-            <div class="container">
+            <div class="sign-up-container container">
                 <h4 class="signup-form-title">Sign-Up Form</h4>
                 <form class="form" method="POST">
                     <div class="form-element text-center">
