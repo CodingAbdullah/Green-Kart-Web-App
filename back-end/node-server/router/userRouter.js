@@ -3,6 +3,6 @@ const userController = require("../controller/UserController");
 const router = express.Router();
 
 router.get("/", userController.homePageFunction);
-router.post("/form", userController.formValidation);
+//router.post("/loginSubmitForm", userController.loginFormValidation);
 
 module.exports = router;
