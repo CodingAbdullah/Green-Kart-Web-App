@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Productcard from '../Productcard/productcard';
-import Footer from '../Footer/footer';
 import './productgrid.css';
 import Costdashboard from '../Costdashboard/costdashboard';
-
 
 class Productgrid extends Component {
     constructor() {
@@ -93,9 +91,8 @@ class Productgrid extends Component {
                         <Productcard key={item.id} product={item}
                         onIncrement={this.updateIncrementValue} onReset={this.updateResetValue} onDecrement={this.updateDecrementValue} />)}
                     </div> 
-                        <Costdashboard cost={this.state.totalCost} quantity={this.state.totalQuantity} uniqueItems={this.state.uniqueItems} />
+                        <Costdashboard product={this.state.product} cost={this.state.totalCost} quantity={this.state.totalQuantity} uniqueItems={this.state.uniqueItems} />
                 </div>
-                <Footer />
             </div>
         );
     }

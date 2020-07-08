@@ -4,17 +4,37 @@ exports.homePageFunction = (req, res) => {
 
 };
 
-exports.loginFormValidation = (req, res) => {
-    const email = req.body.email.toString();
-    const password = req.body.password.toString();
-    const error = "Invalid creds!";
+exports.signUpFormValidation = (req, res) => {
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const email = req.body.email;
+    const age = req.body.age;
+    const password = req.body.password;
+    const address = req.body.address;
+    const gender = req.body.gender.toLowerCase();
 
-    if (email === ""){
-       console.log("Email field is empty");
-    }
-    else if (password === ""){
-        console.log('error is password');
-    }
+    const newUser = new User({first_name: firstname, last_name: lastname, age: age, email: email, password: password, address: address, gender: gender});
+    newUser.save().then(() => console.log("Successfully added User to DB")).catch(err => console.log(err));
+}
+
+exports.loginFormValidation = (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    User.findOne({$and : [{email: { $eq: email}}, {password: {$eq: password}}]}, (err, result) => {
+        if (err) {
+        console.log(err);
+        }
+        else {
+            if (result == null){
+                res.json({message: 'INVALID'});
+            }
+            else {
+                res.json({message: 'VALID'});
+            }
+        }
+    });
+
 
    /* if (firstname === "" || /\d/.test(firstname)){
         console.log('error is firstname');
@@ -34,10 +54,6 @@ exports.loginFormValidation = (req, res) => {
    /* else if (address === ""){
         console.log('error is address');
     }*/
-    else {
-        const newUser = new User({first_name: firstname, last_name: lastname, age: age, email: email, password: password, address: address, gender: gender});s
-        newUser.save().then(()=> console.log("Successful addition to DB")).catch(err => console.log(err));
-    }
 };
 
 

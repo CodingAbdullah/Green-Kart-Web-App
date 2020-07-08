@@ -8,6 +8,7 @@ import Login from '../src/Component/Login/login';
 import Signup from '../src/Component/Signup/signup';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Productgrid from './Component/Productgrid/productgrid';
+import BillSummary from './Component/Billsummary/billsummary';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact={true} path="/" component={Homepage} />
+          <Route exact={true} path="/bill" component={BillSummary} />
           <Route exact={true} path="/login" component={Login} />
           <Route exact={true} path="/signup" component={Signup} />
           <Route exact={true} path="/productPricing" component={Productgrid} />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './login.css';
+import axios from 'axios';
 
 class Login extends Component {
     state = {
@@ -20,18 +21,7 @@ class Login extends Component {
     }
 
     formHandler = () => {
-        fetch("/loginSubmitForm", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },      
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
-            })
-        }).then(response => response.json()).then(result => {
-            this.setState({message: result})
-        }).catch(err => console.log(err));
+        axios("/loginSubmitForm").then(response => console.log(response.data)).catch(err => console.log(err));
     }
     
     render() {
@@ -55,7 +45,7 @@ class Login extends Component {
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-5">
-                                    <button type="submit" class="btn login-button btn-success">Login</button>
+                                    <button type="submit" onClick={this.formHandler} class="btn login-button btn-success">Login</button>
                                 </div>
                             </div>
                         </div>
