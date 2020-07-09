@@ -35,7 +35,6 @@ class Signup extends Component  {
     addressEventHandler = (event) => {
         this.setState({address: event.target.value});
     }
- 
 
     render() {
         return (
@@ -83,11 +82,11 @@ class Signup extends Component  {
                             <div class="form-group row">
                                     <label class="form-title col-sm-2 col-form-label pt-0">Gender</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" value="male" checked />
+                                        <input class="form-check-input" id="male-button" type="radio" name="gender" value="male" checked />
                                         <label class="form-check-label">Male</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" value="female" />
+                                        <input class="form-check-input" id="female-button" type="radio" name="gender" value="female" />
                                         <label class="form-check-label">Female</label>
                                     </div>
                             </div>
