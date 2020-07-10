@@ -3,12 +3,13 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../src/Component/Navbar/navbar';
 import Footer from '../src/Component/Footer/footer';
-import Homepage from '../src/Component/HomePage/homepage';
+import HomePage from '../src/Component/HomePage/homepage';
 import Login from '../src/Component/Login/login';
-import Signup from '../src/Component/Signup/signup';
+import SignUp from '../src/Component/SignUp/signup';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Productgrid from './Component/Productgrid/productgrid';
-import BillSummary from './Component/Billsummary/billsummary';
+import ProductGrid from './Component/ProductGrid/productgrid';
+import BillSummary from './Component/BillSummary/billsummary';
+import ShopeRecord from './Component/ShopRecord/shoprecord';
 
 function App() {
   return (
@@ -16,11 +17,11 @@ function App() {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact={true} path="/" component={Homepage} />
+          <Route exact={true} path="/" component={HomePage} />
           <Route exact={true} path="/bill" component={BillSummary} />
           <Route exact={true} path="/login" component={Login} />
-          <Route exact={true} path="/signup" component={Signup} />
-          <Route exact={true} path="/productPricing" component={Productgrid} />
+          <Route exact={true} path="/signup" component={SignUp} />
+          <Route exact={true} path="/productPricing" component={ProductGrid} />
         </Switch>
         <Footer />
       </div>

@@ -1,6 +1,7 @@
 import React from 'react'
-import '../Productcard/productcard.css';
-const Productcard = (props) => {
+import '../ProductCard/productcard.css';
+
+const ProductCard = (props) => {
     const name = props.product.name.toLowerCase().replace(' ', '_');
     
     return (
@@ -28,4 +29,4 @@ const Productcard = (props) => {
     );
 }
 
-export default Productcard;
+export default ProductCard;

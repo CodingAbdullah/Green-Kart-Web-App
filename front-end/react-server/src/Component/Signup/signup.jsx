@@ -41,7 +41,7 @@ class Signup extends Component  {
             <div className="signup-form">
                 <div class="sign-up-container container">
                     <h4 class="signup-form-title">Sign-Up Form</h4>
-                    <form action="/signupform" method="POST">
+                    <form action="/signUpForm" method="POST">
                         <div class="form-element text-center">
                             <div class="form-group row text-center">
                                 <label class="form-title col-sm-2 col-form-label">First Name</label>
@@ -58,7 +58,7 @@ class Signup extends Component  {
                             <div class="form-group row">
                                 <label class="form-title col-sm-2 col-form-label">Age</label>
                                 <div class="col-sm-5">
-                                    <input type="number" class="form-control" name="age" onChange={this.ageEventHandler} placeholder="Age" />
+                                    <input type="number" class="form-control" max="150" min="0" name="age" onChange={this.ageEventHandler} placeholder="Age" />
                                 </div>
                             </div>
                             <div class="form-group row">

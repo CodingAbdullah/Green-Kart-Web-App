@@ -1,8 +1,8 @@
 import React from 'react';
-import '../Costdashboard/costdashboard.css';
+import '../CostDashboard/costdashboard.css';
 import { Link } from 'react-router-dom';
 
-const Costdashboard = (props) => {
+const CostDashboard = (props) => {
 
     const location = {
         pathname : '/bill',
@@ -24,4 +24,4 @@ const Costdashboard = (props) => {
     );
 }
 
-export default Costdashboard;
+export default CostDashboard;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Productcard from '../Productcard/productcard';
+import ProductCard from '../ProductCard/productcard';
 import './productgrid.css';
-import Costdashboard from '../Costdashboard/costdashboard';
+import CostDashboard from '../CostDashboard/costdashboard';
 
-class Productgrid extends Component {
+class ProductGrid extends Component {
     constructor() {
         super();
 
@@ -88,14 +88,14 @@ class Productgrid extends Component {
                     <h5 className="inventory-title">Inventory (Maximum five per item)</h5>
                     <div className="row mx-auto">
                         {this.state.product.map(item => 
-                        <Productcard key={item.id} product={item}
+                        <ProductCard key={item.id} product={item}
                         onIncrement={this.updateIncrementValue} onReset={this.updateResetValue} onDecrement={this.updateDecrementValue} />)}
                     </div> 
-                        <Costdashboard product={this.state.product} cost={this.state.totalCost} quantity={this.state.totalQuantity} uniqueItems={this.state.uniqueItems} />
+                        <CostDashboard product={this.state.product} cost={this.state.totalCost} quantity={this.state.totalQuantity} uniqueItems={this.state.uniqueItems} />
                 </div>
             </div>
         );
     }
 }
 
-export default Productgrid;
+export default ProductGrid;
