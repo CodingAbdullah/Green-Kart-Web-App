@@ -1,13 +1,22 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const config = require("dotenv").config({path : '../.env'});
 
-module.exports  = auth = (req, res, next) => {
+module.exports = (req, res, next) => {
+    
+    const token = req.header('x-auth-token');
 
-    users = {
-        users: req.user.id
+    if (!token) {
+        return res.status(400).json({message: "INVALID TOKEN, authorization denied"});
     }
-
-    jwt.sign({ users : req.user.id}, process.env.SECRET,  {expiresIn : 3600});
-    next();
+    else {
+        jwt.verify(token, process.env.SECRET, (err, decoded) => {
+            if (err){
+                return res.status(400).json({message: "INVALID decoded"});
+            }
+            else {
+                req.user = decoded.newUser;
+                next();
+            }
+        });
+    }
 }

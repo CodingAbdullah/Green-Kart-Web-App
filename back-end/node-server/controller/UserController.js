@@ -2,6 +2,23 @@ const User =  require("../model/User");
 const bcrypt = require("bcrypt");
 const jwt  = require("jsonwebtoken");
 
+exports.getAuthorization = (req, res) => {
+    
+    if (req.user._id){
+        User.findById(req.user._id, (err, user) => {
+            if (err){
+                res.status(400).json({message : "INVALID"});
+            }
+            else {
+                res.status(200).json({ user });
+            }
+        });
+    }
+    else {
+        res.status(400).json({message : "INVALID"});
+    }
+}
+
 exports.signUpFormValidation = (req, res) => {
     req.body.password = req.body.password.toString();
 
@@ -27,7 +44,7 @@ exports.signUpFormValidation = (req, res) => {
                             
                             // JWT TOKEN GENERATOR...
 
-                            const payload = {id : newUser.id};
+                            const payload = { newUser };
 
                             jwt.sign(payload, process.env.SECRET, {expiresIn: 3600}, (err, token) => {
                                 if (err){
@@ -36,7 +53,7 @@ exports.signUpFormValidation = (req, res) => {
                                 else {
                                     res.status(201).json({token});
                                 }
-                            });
+                            })
                         }
                     });
                 }
