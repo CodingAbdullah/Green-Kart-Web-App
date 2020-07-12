@@ -2,7 +2,6 @@ const dotenv = require("dotenv").config({ path: '.env' });
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 const URL = "mongodb+srv://greenKartCustomer:" + process.env.DB_PASS + "@greenkartdb-fambj.mongodb.net/" + process.env.DB_NAME + "?retryWrites=true&w=majority";
 
 const userRouter = require("./router/userRouter");

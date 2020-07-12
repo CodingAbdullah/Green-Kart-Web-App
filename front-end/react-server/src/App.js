@@ -9,7 +9,7 @@ import SignUp from '../src/Component/SignUp/signup';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProductGrid from './Component/ProductGrid/productgrid';
 import BillSummary from './Component/BillSummary/billsummary';
-import ShopeRecord from './Component/ShopRecord/shoprecord';
+import ShopRecord from './Component/ShopRecord/shoprecord';
 
 function App() {
   return (

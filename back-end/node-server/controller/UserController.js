@@ -1,5 +1,6 @@
 const User =  require("../model/User");
 const bcrypt = require("bcrypt");
+const jwt  = require("jsonwebtoken");
 
 exports.signUpFormValidation = (req, res) => {
     req.body.password = req.body.password.toString();
@@ -24,7 +25,18 @@ exports.signUpFormValidation = (req, res) => {
                             const newUser = new User({first_name: firstname, last_name: lastname, age: age, email: email, password: hash, address: address, gender: gender.toLowerCase()});
                             newUser.save().then(() => console.log("Successfully added User to DB")).catch(err => console.log(err));
                             
-                            res.json({message : "VALID POST"});
+                            // JWT TOKEN GENERATOR...
+
+                            const payload = {id : newUser.id};
+
+                            jwt.sign(payload, process.env.SECRET, {expiresIn: 3600}, (err, token) => {
+                                if (err){
+                                    res.status(400).json({message: "INVALID TOKEN"});
+                                }
+                                else {
+                                    res.status(201).json({token});
+                                }
+                            });
                         }
                     });
                 }
