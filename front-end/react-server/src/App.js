@@ -16,13 +16,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Navbar />
-        <Switch>
-          <Route exact={true} path="/" component={HomePage} />
-          <Route exact={true} path="/bill" component={BillSummary} />
-          <Route exact={true} path="/login" component={Login} />
-          <Route exact={true} path="/signup" component={SignUp} />
-          <Route exact={true} path="/productPricing" component={ProductGrid} />
-        </Switch>
+        <ShopRecord />
         <Footer />
       </div>
     </BrowserRouter>

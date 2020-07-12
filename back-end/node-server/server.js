@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const URL = "mongodb+srv://greenKartCustomer:" + process.env.DB_PASS + "@greenkartdb-fambj.mongodb.net/" + process.env.DB_NAME + "?retryWrites=true&w=majority";
-
+const cors = require("cors");
 const userRouter = require("./router/userRouter");
 const vegetableRouter = require("./router/vegetableRouter");
 const orderRouter = require("./router/orderRouter");
@@ -17,7 +17,7 @@ app.use(express.json({extended : false}));
 app.use(express.urlencoded({extended : false}));
 
 mongoose.connect(URL).then(() => console.log("Successful connection to DB")).catch(err => console.log(err));
-
+app.use(cors());
 app.use("/", userRouter);
 //app.use("/", vegetableRouter);
 //app.use("/", orderRouter);
