@@ -11,16 +11,13 @@ import ProductGrid from './Component/ProductGrid/productgrid';
 import BillSummary from './Component/BillSummary/billsummary';
 import ShopRecord from './Component/ShopRecord/shoprecord';
 import  { Provider } from 'react-redux';
-import {createStore, applyMiddleware } from 'redux';
-
-const store = createStore(() => [], {}, applyMiddleware())
+import store from './redux/store';
 
 class App extends Component {
 
   render(){
-      
       return (
-        <Provider store={store}>
+        <Provider store={store} >
           <BrowserRouter>
             <div className="App">
               <Navbar />

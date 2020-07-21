@@ -23,7 +23,6 @@
 
 .login-container {
     margin-top: 50px;
-    margin-bottom: 50px;
     width: 50%;
     background-color: lightgreen;
     border: 5px solid green;
@@ -49,14 +48,4 @@
 .btn-success:hover {
     background-color: yellow;
     color: black;
-}
-
-.login-button {
-    margin-left: 100%;
-}
-
-@media (max-width: 576px) {
-    .sign-in-button {
-        margin-left: 0;
-    }
 }
