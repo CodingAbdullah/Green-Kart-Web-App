@@ -11,6 +11,7 @@ const register = (firstname, lastname, age, email, password, address, gender) =>
     }
     axios.post('/signUpForm', body, config)
     .then(response => {
+        console.log(response.data);
         dispatch({
             type: REGISTER_SUCCESS,
             payload: response.data

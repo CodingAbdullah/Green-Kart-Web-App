@@ -16,15 +16,15 @@ class Signup extends Component  {
             email: "",
             password: "",
             address: "",
-            gender: ""
+            gender: "male"
         }
     }
 
     firstNameEventHandler = (event) => {
-        this.setState({first_name: event.target.value});
+        this.setState({firstName: event.target.value});
     }
     lastNameEventHandler = (event) => {
-        this.setState({last_name: event.target.value});
+        this.setState({lastName: event.target.value});
     }
     ageEventHandler = (event) => {
         this.setState({age: event.target.value});
@@ -39,10 +39,21 @@ class Signup extends Component  {
         this.setState({address: event.target.value});
     }
 
-    formHandler = (event) => {
-        const {firstname, lastname, age, email, password, address, gender} = this.state;
+    genderClicked = (event) => {
+        this.setState({gender: event.target.value});
+    }
 
-        this.props.register(firstname, lastname, age, email, password, address, gender);
+    formHandler = (event) => {
+        const {firstName, lastName, age, email, password, address, gender} = this.state;
+
+        console.log("First name" + firstName);
+        console.log("Last name" + lastName);
+        console.log("Age" + age);
+        console.log("Email" + email);
+        console.log("Password" + password);
+        console.log("Address" + address);
+        console.log("Gender" + gender);
+        this.props.register(firstName, lastName, age, email, password, address, gender);
         event.preventDefault();
     }
 
@@ -92,11 +103,11 @@ class Signup extends Component  {
                             <div class="form-group row">
                                     <label class="form-title col-sm-2 col-form-label pt-0">Gender</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" id="male-button" type="radio" name="gender" value="male" checked />
+                                        <input class="form-check-input" id="male-button" onChange={this.genderClicked} type="radio" name="gender" value="male" checked />
                                         <label class="form-check-label">Male</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" id="female-button" type="radio" name="gender" value="female" />
+                                        <input class="form-check-input" id="female-button" onChange={this.genderClicked} type="radio" name="gender" value="female" />
                                         <label class="form-check-label">Female</label>
                                     </div>
                             </div>
