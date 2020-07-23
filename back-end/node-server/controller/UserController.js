@@ -2,7 +2,6 @@ const User =  require("../model/User");
 const bcrypt = require("bcrypt");
 const jwt  = require("jsonwebtoken");
 
-
 exports.getAuthorization = (req, res) => {
     
     if (req.user._id){

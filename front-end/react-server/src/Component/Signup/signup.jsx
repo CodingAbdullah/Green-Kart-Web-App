@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './signup.css';
+import PropTypes from 'prop-types';
+import register from '../../redux/action/registerAction';
+import { connect } from 'react-redux';
 
 class Signup extends Component  {
     
@@ -36,12 +39,19 @@ class Signup extends Component  {
         this.setState({address: event.target.value});
     }
 
+    formHandler = (event) => {
+        const {firstname, lastname, age, email, password, address, gender} = this.state;
+
+        this.props.register(firstname, lastname, age, email, password, address, gender);
+        event.preventDefault();
+    }
+
     render() {
         return (
             <div className="signup-form">
                 <div class="sign-up-container container">
                     <h4 class="signup-form-title">Sign-Up Form</h4>
-                    <form action="/signUpForm" method="POST">
+                    <form onSubmit={this.formHandler} method="POST">
                         <div class="form-element text-center">
                             <div class="form-group row text-center">
                                 <label class="form-title col-sm-2 col-form-label">First Name</label>
@@ -103,4 +113,8 @@ class Signup extends Component  {
     }
 }
 
-export default Signup;
+Signup.prototypes = {
+    register: PropTypes.func.isRequired
+}
+
+export default connect(null,{register})(Signup);

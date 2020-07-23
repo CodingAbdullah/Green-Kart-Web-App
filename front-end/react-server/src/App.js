@@ -11,7 +11,7 @@ import ProductGrid from './Component/ProductGrid/productgrid';
 import BillSummary from './Component/BillSummary/billsummary';
 import ShopRecord from './Component/ShopRecord/shoprecord';
 import  { Provider } from 'react-redux';
-import store from './redux/store';
+import store from './redux/store/store';
 
 class App extends Component {
 
