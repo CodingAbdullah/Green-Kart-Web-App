@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './login.css';
 import Proptypes from 'prop-types';
+import { connect } from 'react-redux';
+import { login } from '../../redux/action/authAction';
 
 class Login extends Component {
     
@@ -31,6 +33,8 @@ class Login extends Component {
         const password = this.state.password;
 
         this.props.login(email, password);
+
+        event.preventDefault();
     }   
     
     render() {
@@ -69,4 +73,4 @@ Login.prototypes = {
     login: Proptypes.func.isRequired
 }
 
-export default Login;
+export default connect(null, {login})(Login);
