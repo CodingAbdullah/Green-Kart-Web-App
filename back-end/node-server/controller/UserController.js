@@ -10,7 +10,10 @@ exports.getAuthorization = (req, res) => {
                 res.status(400).json({message : "INVALID"});
             }
             else {
-                res.status(200).json({ user });
+                const User = {_id: user._id, first_name: user.first_name, last_name: user.last_name, age: user.age,
+                email: user.email, address: user.address, gender: user.gender };
+
+                res.status(200).json({ User });
             }
         });
     }
@@ -43,7 +46,6 @@ exports.signUpFormValidation = (req, res) => {
                             newUser.save().then(() => console.log("Successfully added User to DB")).catch(err => console.log(err));
                             
                             // JWT TOKEN GENERATOR...
-
                             const payload = { newUser };
 
                             jwt.sign(payload, process.env.SECRET, {expiresIn: 3600}, (err, token) => {
@@ -53,7 +55,7 @@ exports.signUpFormValidation = (req, res) => {
                                 else {
                                     res.status(201).json({token});
                                 }
-                            })
+                            });
                         }
                     });
                 }
@@ -63,33 +65,44 @@ exports.signUpFormValidation = (req, res) => {
 }
 
 exports.loginFormValidation = (req, res) => {
-    const {email} = req.body;
+    const { email } = req.body;
     const password = req.body.password.toString();
 
-    User.findOne({email : {$eq : email}}).then(result => {
-        if (result){
+    User.findOne({ email : { $eq : email }}).then(result => {
+        if ( result ){
             console.log("Username validated");
             bcrypt.compare(password, result.password, (err, result) => {
                 if (err){
-                    console.log(err);
+                    res.status(401).json({message: 'Cannot encrypt password. Wrong password'});
                 }
                 else {
                     if (result){
                         console.log("User login complete");
-                        res.status(200).json({message: "Valid creds"});
+                        const loginUser = User.findOne({ email : { $eq : email }});
+
+                        jwt.sign(loginUser, process.env.SECRET, { expiresIn: 3600 }, (err, token) => {
+                            if (err){
+                                console.log("There was a error signing a login token " + err);
+                            }
+                            else {
+                                res.status(201).json({token});
+                            }
+                        });
                     }
                     else {
-                        console.log("User is not logged in, due to invalid password");
-                        res.status(401).json({message: "Invalid creds"});
+                        res.status(500).json({message: "Something wrong with result, couldn't verify account"});
                     }
                 }
-            })
+            });
         }
         else {
             console.log("Invalid username!");
-            res.status(401).json({message: "Invalid creds"});
+            res.status(401).json({ message: "Invalid creds" });
         }
-    }).catch(err => {console.log(err)});
+    })
+    .catch(err => {
+        console.log(err)
+    });
    
    /* if (firstname === "" || /\d/.test(firstname)){
         console.log('error is firstname');

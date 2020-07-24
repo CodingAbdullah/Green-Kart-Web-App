@@ -9,11 +9,20 @@ import SignUp from '../src/Component/SignUp/signup';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProductGrid from './Component/ProductGrid/productgrid';
 import BillSummary from './Component/BillSummary/billsummary';
-import ShopRecord from './Component/ShopRecord/shoprecord';
-import  { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
+import { loadUser } from '../src/redux/action/authAction'
 import store from './redux/store/store';
+import setAuthToken from './redux/util/authToken';
+
+  if (localStorage.token){
+    setAuthToken(localStorage.token);
+  }
 
 class App extends Component {
+
+  componentDidMount() {
+      store.dispatch(loadUser())
+  }
 
   render(){
       return (

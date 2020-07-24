@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import './login.css';
-import axios from 'axios';
+import Proptypes from 'prop-types';
 
 class Login extends Component {
-    state = {
-        email : "",
-        password : "",
+    
+    constructor(props){
+        super(props);
+
+        this.state = {
+            email: "",
+            password: ""
+        };
     }
 
     usernameHandler = (event) => {
@@ -21,23 +26,19 @@ class Login extends Component {
     }
 
     formHandler = (event) => {
-        axios.post("/loginSubmitForm", {
-            email: this.state.email,
-            password: this.state.password
-        })
-        .then(response => {
-            console.log(response);       
-        })
-        .catch(err => console.log(err));
-        event.preventDefault();
-    }
+    // Client side validation has already taken place
+        const email = this.state.email;
+        const password = this.state.password;
+
+        this.props.login(email, password);
+    }   
     
     render() {
         return (
             <div className="login-form">
                 <div class="container login-container">
                     <h4 class="login-form-title">Login Form</h4>
-                    <form method="/loginSubmitForm" method="POST">
+                    <form onSubmit={this.formHandler} method="POST">
                         <div class="form-element text-center">
                             <div class="form-group row text-center">
                                 <label class="form-title col-sm-2 col-form-label">Email</label>
@@ -60,8 +61,12 @@ class Login extends Component {
                     </form>
                 </div>
             </div>
-        )
+        );
     }
+}
+
+Login.prototypes = {
+    login: Proptypes.func.isRequired
 }
 
 export default Login;

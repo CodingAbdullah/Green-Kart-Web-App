@@ -3,21 +3,22 @@ import axios from 'axios';
 
 const login = (email, password) => (dispatch) => {
         const body = JSON.stringify({email, password});
+
         const config = {
             'Content-Type': 'application/json'
         }
 
-        axios.post("/auth", body, config).then(response => {
-            return {
+        axios.post("/loginSubmitForm", body, config).then(response => {
+            dispatch({
                 type: LOGIN_SUCCESS,
-                payload: response
-            }
-
-        }).catch(err => {
-            console.log("Error trying to login" + err);
-            return {
+                payload: response.data
+            });
+        })
+        .catch(err => {
+            console.log("There is an error validating form " + err);
+            dispatch({
                 type: LOGIN_FAILURE
-            }
+            });
         });
 }
 

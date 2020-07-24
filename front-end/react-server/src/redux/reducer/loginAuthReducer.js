@@ -7,18 +7,22 @@ const initialState = {
 }
 
 const loginAuth = (state = initialState, action) => {
+    const { type, payload } = action;
 
-    switch (action.type){
+    switch (type){
         case LOGIN_SUCCESS:
+            localStorage.setItem('token', payload.token);
             return {
                 ...state,
-                
+                ...payload,
                 isAuthenticated: true
             }
 
         case LOGIN_FAILURE:
+            localStorage.removeItem('token');
             return {
                 ...state,
+                token: null,
                 isAuthenticated: false
             }
         default:

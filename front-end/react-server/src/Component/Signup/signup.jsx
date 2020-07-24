@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './signup.css';
 import PropTypes from 'prop-types';
-import register from '../../redux/action/registerAction';
+import { register } from '../../redux/action/authAction';
 import { connect } from 'react-redux';
 
 class Signup extends Component  {
@@ -46,13 +46,6 @@ class Signup extends Component  {
     formHandler = (event) => {
         const {firstName, lastName, age, email, password, address, gender} = this.state;
 
-        console.log("First name" + firstName);
-        console.log("Last name" + lastName);
-        console.log("Age" + age);
-        console.log("Email" + email);
-        console.log("Password" + password);
-        console.log("Address" + address);
-        console.log("Gender" + gender);
         this.props.register(firstName, lastName, age, email, password, address, gender);
         event.preventDefault();
     }
@@ -128,4 +121,4 @@ Signup.prototypes = {
     register: PropTypes.func.isRequired
 }
 
-export default connect(null,{register})(Signup);
+export default connect(null,{ register })(Signup);
