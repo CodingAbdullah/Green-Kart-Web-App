@@ -4,6 +4,7 @@ import './productgrid.css';
 import CostDashboard from '../CostDashboard/costdashboard';
 
 class ProductGrid extends Component {
+    
     constructor() {
         super();
 

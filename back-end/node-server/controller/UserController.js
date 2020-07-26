@@ -10,7 +10,7 @@ exports.getAuthorization = (req, res) => {
                 res.status(400).json({message : "INVALID"});
             }
             else {
-                const User = {_id: user._id, first_name: user.first_name, last_name: user.last_name, age: user.age,
+                const User = { _id: user._id, first_name: user.first_name, last_name: user.last_name, age: user.age,
                 email: user.email, address: user.address, gender: user.gender };
 
                 res.status(200).json({ User });

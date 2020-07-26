@@ -28,7 +28,7 @@ export const register = (firstname, lastname, age, email, password, address, gen
         headers : {
             'Content-type': 'application/json'
         }
-    }
+    };
 
     axios.post('/signUpForm', body, config)
     .then(response => {
@@ -41,7 +41,7 @@ export const register = (firstname, lastname, age, email, password, address, gen
         dispatch(loadUser());
     })
     .catch(err => {
-        console.log("Error exists while trying to register user" + err);
+        console.log("Error exists while trying to register user " + err);
         dispatch({
             type: REGISTER_FAILURE
         });
@@ -56,7 +56,7 @@ export const login = (email, password) => (dispatch) => {
         headers : {
             'Content-type': 'application/json'
         }
-    }
+    };
 
     axios.post("/loginSubmitForm", body, config)
     .then(response => {
@@ -72,5 +72,5 @@ export const login = (email, password) => (dispatch) => {
         dispatch({
             type: LOGIN_FAILURE
         });
-    })
+    });
 }
