@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ProductCard from '../ProductCard/productcard';
 import './productgrid.css';
 import CostDashboard from '../CostDashboard/costdashboard';
 
-class ProductGrid extends Component {
+const ProductGrid = () => {
     
-    constructor() {
-        super();
-
         const names = ['Artichoke', 'Asparagus', 'Avocado', 'Bok Choy', 
         'Broccoli', 'Brussel Sprouts', 'Cabbage', 'Califlower', 'Celery', 'Chilli', 'Clover',
         'Collard Green', 'Corn', 'Cucumber', 'Green Beans', 'Green Pepper', 'Kale', 'Leek', 'Lettuce', 
@@ -22,81 +19,84 @@ class ProductGrid extends Component {
             startingCost += 0.25;
         }
 
-        this.state = {
-            product: products,
-            totalCost: 0.00,
-            totalQuantity: 0,
-            uniqueItems: 0
-        }
-    }
+        const [productList, updateProductList] = useState(products);
+        const [totalCost, updateTotalCost] = useState(0.0);
+        const [totalQuantity, updateTotalQuantity] = useState(0);
+        const [uniqueItems, updateUniqueItems] = useState(0);
     
-    updateIncrementValue = (id) => {
-        var prod = this.state.product;
-        var cost = this.state.totalCost;
+    const updateIncrementValue = (id) => {
+        var prod = productList;
+        var cost = totalCost;
 
         var addUniqueItem = prod[id - 1].quantity == 0 ? 1 : 0;
-        var newUniqueValue = this.state.uniqueItems;
+        var newUniqueValue = uniqueItems;
 
-        var quantity = this.state.totalQuantity;
+        var quantity = totalQuantity;
         var newQuantity = quantity + 1;
 
         prod[id - 1].quantity = prod[id - 1].quantity + 1;
         cost += prod[id - 1].price;
 
-        this.setState({product: prod, totalCost: cost, uniqueItems: newUniqueValue + addUniqueItem, 
-            totalQuantity: newQuantity}); 
+        updateProductList(prod);
+        updateTotalCost(cost);
+        updateUniqueItems(newUniqueValue + addUniqueItem);
+        updateTotalQuantity(newQuantity);
     };
 
-    updateDecrementValue = (id) => {
-        var prod = this.state.product;
-        var cost = this.state.totalCost;
+    const updateDecrementValue = (id) => {
+        var prod = productList;
+        var cost = totalCost;
 
         prod[id - 1].quantity = prod[id - 1].quantity - 1;
         cost -= prod[id - 1].price;
 
         var uniqueItemCount = prod[id - 1].quantity == 0 ? 1 : 0;
-        var uniqueItemCountValue = this.state.uniqueItems;
+        var uniqueItemCountValue = uniqueItems;
 
-        var quantity = this.state.totalQuantity;
+        var quantity = totalQuantity;
         var newQuantity = quantity - 1;
 
-        this.setState({product: prod, totalCost: cost, uniqueItems: uniqueItemCountValue - uniqueItemCount, totalQuantity: newQuantity});
+        updateProductList(prod);
+        updateTotalCost(cost);
+        updateUniqueItems(uniqueItemCountValue - uniqueItemCount);
+        updateTotalQuantity(newQuantity);
     };
 
-    updateResetValue = (id) => {
-        var prod = this.state.product;
-        var cost = this.state.totalCost;
+    const updateResetValue = (id) => {
+        var prod = productList;
+        var cost = totalCost;
 
         cost -= prod[id - 1].quantity * prod[id - 1].price;
 
-        var totalQuantity = this.state.totalQuantity;
-        var newTotalQuantity =  totalQuantity - prod[id - 1].quantity;
+        var TotalQuantity = totalQuantity;
+        var newTotalQuantity =  TotalQuantity - prod[id - 1].quantity;
 
-        var uniqueQuantity = this.state.uniqueItems;
+        var uniqueQuantity = uniqueItems;
         var newUniqueQuantity = prod[id - 1].quantity == 0 ? 0 : 1;
 
         uniqueQuantity -= newUniqueQuantity;
 
         prod[id - 1].quantity = 0;
 
-        this.setState({product: prod, totalCost: cost, totalQuantity: newTotalQuantity, uniqueItems: uniqueQuantity});
+        updateProductList(prod);
+        updateTotalCost(cost);
+        updateUniqueItems(uniqueQuantity);
+        updateTotalQuantity(newTotalQuantity);
     }
 
-    render() {
-        return (
+    return (
             <div className="product-grid col-centered">
                 <div className="container">
                     <h5 className="inventory-title">Inventory (Maximum five per item)</h5>
                     <div className="row mx-auto">
-                        {this.state.product.map(item => 
+                        {productList.map(item => 
                         <ProductCard key={item.id} product={item}
-                        onIncrement={this.updateIncrementValue} onReset={this.updateResetValue} onDecrement={this.updateDecrementValue} />)}
+                        onIncrement={updateIncrementValue} onReset={updateResetValue} onDecrement={updateDecrementValue} />)}
                     </div> 
-                        <CostDashboard product={this.state.product} cost={this.state.totalCost} quantity={this.state.totalQuantity} uniqueItems={this.state.uniqueItems} />
+                        <CostDashboard product={productList} cost={totalCost} quantity={totalQuantity} uniqueItems={uniqueItems} />
                 </div>
             </div>
         );
     }
-}
 
 export default ProductGrid;

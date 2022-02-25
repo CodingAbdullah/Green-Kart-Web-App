@@ -1,6 +1,6 @@
 import React from 'react';
 import './jumbotron.css';
-import homePic from '../../greenies/spinach.jpg';
+import homePic from '../../assets/greenies/spinach.jpg';
 
 const Jumbotron = () => {
 

@@ -1,74 +1,30 @@
-import { REGISTER_SUCCESS, REGISTER_FAILURE, 
-    USER_LOADED, USER_AUTH_FAILURE, 
-    LOGIN_SUCCESS, LOGIN_FAILURE } from '../action/types';
-
 const initialState = {
-    token: localStorage.getItem('token'),
+    token: "",
     isAuthenticated: false,
-    user: null
+    user: {}
 }
 
-const auth = (state = initialState, action) => {
+export const auth = (state = initialState, action) => {
     const { type, payload } = action;
-    console.log(payload);
 
     switch (type) {
-        case USER_LOADED:
-
+        case "LOG_IN":
+            localStorage.set('token', payload.token);
             return {
                 ...state,
+                token: payload.token,
+                user: payload,
                 isAuthenticated: true,
-                user: payload
             }
-
-        case USER_AUTH_FAILURE:
+        case "LOG_IN_FAILURE" || "LOG_OUT":
             localStorage.removeItem('token');
-
             return {
                 ...state,
-                token: null,
-                isAuthenticated: false
-            }
-
-        case REGISTER_SUCCESS:
-            localStorage.setItem('token', payload.token);
-
-            return {
-                ...state,
-                ...payload,
-                isAuthenticated: true
-            }
-
-        case REGISTER_FAILURE:
-            localStorage.removeItem('token');
-
-            return {
-                ...state,
-                token: null,
-                isAuthenticated: false
-            }
-        
-        case LOGIN_SUCCESS:
-            localStorage.setItem('token', payload.token);
-
-            return {
-                ...state,
-                isAuthenticated: true,
-                ...payload
-            }
-            
-        case LOGIN_FAILURE:
-            localStorage.removeItem('token');
-
-            return {
-                ...state,
+                token: "",
+                user: {},
                 isAuthenticated: false,
-                user: null
             }
-
         default:
             return state;
     }
 }
-
-export default auth;

@@ -13,7 +13,7 @@ const ProductCard = (props) => {
                         <div>
                             <h6 className="price-title">Price: ${props.product.price}/Item</h6>
                         </div>
-                        <img className="img-vegetable" src={require(`../../greenies/${name}.jpg`)} width="100" height="100" />
+                        <img className="img-vegetable" src={require(`../../assets/greenies/${name}.jpg`)} width="100" height="100" />
                     </div>
                     <div>
                         <button className= "btn btn-primary btn-sm incrementButton" disabled={props.product.quantity < 5 ? false : true} onClick={() => props.onIncrement(props.product.id)}>+</button>
