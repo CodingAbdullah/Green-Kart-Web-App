@@ -1,8 +1,25 @@
-const express = require("express");
 const Order = require("../model/Order");
 
-exports.getOrderByMembershipId = (req, res) => {
-    res.json({
-        order : JSON.parse(Order.findOne({membership_id : {$eq : 1}}))
-    });
+exports.getOrderHistory = (req, res) => {
+    console.log(req.user);
+
+    const { user } = req.user;
+
+    Order.find({ email : { $eq : user.email }}).then(result => {
+        console.log(result);
+
+        res.status(200).json({
+            orders: result
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json({
+            msg: err
+        });
+    })
+}
+
+exports.orderCheckout = (req, res) => {
+
 }

@@ -17,6 +17,7 @@ app.use(express.json({extended : false}));
 app.use(express.urlencoded({extended : false}));
 
 mongoose.connect(URI, { dbName: process.env.DATABASE }).then(() => console.log("Successful connection to DB")).catch(err => console.log(err));
+
 app.use(cors());
 app.use("/", userRouter);
 app.use("/", orderRouter);

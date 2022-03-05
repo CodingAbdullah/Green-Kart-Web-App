@@ -26,13 +26,12 @@ exports.getAuthorization = (req, res) => {
 */
 
 exports.signUpFormValidation = (req, res) => {    
-    console.log(req);
-    const { firstName, lastName, age, email, password, address, gender} = req.body;
+    const { firstName, lastName, age, email, password, address, gender } = req.body;
 
     User.findOne({ email: { $eq : email }}).then((result) => {
         if (result){
             res.status(400).json({
-                message: "INVALID SIGN UP"
+                message: "User already exists!"
             });
         }
         else {
@@ -58,8 +57,6 @@ exports.signUpFormValidation = (req, res) => {
                                 });
                             })
                             .catch(err => {
-                                console.log(err);
-
                                 res.status(401).json({
                                     msg: err + '. Error saving user to db'
                                 });
@@ -69,7 +66,8 @@ exports.signUpFormValidation = (req, res) => {
                 }
             });
         }
-    }).catch(err => {
+    })
+    .catch(err => {
         res.status(401).json({
             msg: err + ". Couldn't perform user search operation"
         });

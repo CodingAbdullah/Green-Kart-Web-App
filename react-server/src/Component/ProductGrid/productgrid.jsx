@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Navigate } from 'react-router';
 import ProductCard from '../ProductCard/productcard';
 import './productgrid.css';
 import CostDashboard from '../CostDashboard/costdashboard';
@@ -84,6 +85,9 @@ const ProductGrid = () => {
         updateTotalQuantity(newTotalQuantity);
     }
 
+    if (!localStorage.getItem('token')){
+        return <Navigate to="/" />
+    }
     return (
             <div className="product-grid col-centered">
                 <div className="container">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router';
 import './signup.css';
 import axios from 'axios';
@@ -20,7 +20,9 @@ const Signup = () => {
 
     const formHandler = async (e) => {
         e.preventDefault();
-        // Perform loginForm operation...
+        e.target.reset();
+
+        // Perform signup operation...
         const body = JSON.stringify({
             firstName, lastName, age, email, password, address, gender
         });
@@ -67,7 +69,7 @@ const Signup = () => {
     )
 
     if (localStorage.getItem('token')){
-        return <Navigate to="/home" />
+        return <Navigate to="/" />
     }
     else {
         return (

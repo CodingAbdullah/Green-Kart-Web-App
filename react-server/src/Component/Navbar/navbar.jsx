@@ -1,20 +1,27 @@
 import React from 'react';
 import './navbar.css';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const Navbar = () => {
 
     let navBarRendering;
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        localStorage.removeItem('token');
+        navigate("/");
+    }
 
     if (localStorage.getItem('token')) {
         navBarRendering = (
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/logout">Place Order</Link>
+                        <Link className="nav-link" to="/productPricing">Place Order</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/logout">Logout</Link>
+                        <Link className="nav-link" to="/" onClick={logoutHandler}>Logout</Link>
                     </li>
                 </ul>
             </div>           
