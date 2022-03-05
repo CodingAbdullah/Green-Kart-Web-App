@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProductGrid from './Component/ProductGrid/productgrid';
 import { Provider } from 'react-redux';
 import { store }  from './redux/store/store';
+import OrderCheckout from './Component/OrderCheckout/ordercheckout';
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<SignUp />} />
                   <Route path="/productPricing" element={<ProductGrid />} />
+                  <Route path="/checkout" element={<OrderCheckout />} />
                   <Route path="/" element={<HomePage />} />
                 </Routes>
               <Footer />

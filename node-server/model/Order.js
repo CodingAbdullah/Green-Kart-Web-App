@@ -9,7 +9,6 @@ const orderSchema = new Schema({
     date : {
         required: true,
         type: Date,
-        default : Date.now
     },
     order_description : {
         required: true,
