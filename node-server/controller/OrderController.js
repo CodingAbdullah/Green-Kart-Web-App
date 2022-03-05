@@ -3,9 +3,9 @@ const Order = require("../model/Order");
 exports.getOrderHistory = (req, res) => {
     console.log(req.user);
 
-    const { email } = req.user;
+    const { userId } = req.user;
 
-    Order.find({ email : { $eq : email }}).then(result => {
+    Order.find({ user_id : { $eq : userId }}).then(result => {
         console.log(result);
 
         res.status(200).json({

@@ -18,6 +18,9 @@ const Navbar = () => {
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
+                        <Link className="nav-link" to="/orderHistory">Order History</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link className="nav-link" to="/productPricing">Place Order</Link>
                     </li>
                     <li className="nav-item">

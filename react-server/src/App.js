@@ -11,6 +11,7 @@ import ProductGrid from './Component/ProductGrid/productgrid';
 import { Provider } from 'react-redux';
 import { store }  from './redux/store/store';
 import OrderCheckout from './Component/OrderCheckout/ordercheckout';
+import OrderHistory from './Component/OrderHistory/orderhistory';
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<SignUp />} />
                   <Route path="/productPricing" element={<ProductGrid />} />
+                  <Route path="/orderHistory" element={<OrderHistory />} />
                   <Route path="/checkout" element={<OrderCheckout />} />
                   <Route path="/" element={<HomePage />} />
                 </Routes>
