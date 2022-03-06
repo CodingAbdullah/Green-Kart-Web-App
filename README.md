@@ -9,14 +9,21 @@ In this project directory, you will find two server folders, one to run the fron
 
 Under the node server folder, you will need to add environment variables for the `PORT` you want to run the server (5050). <br/>
 
-You will also need to specify the `USERNAME`, `PASSWORD` and `DATABASE` to which you will use to authenticate and gain access to MongoDB. A `SECRET` which will verify you and sign a JWT and gain access to protected routes.
+You will also need to specify the `USERNAME`, `PASSWORD` and `DATABASE` to which you will use to authenticate and gain access to MongoDB. A `SECRET` which will verify you and sign a JWT to gain access to protected routes.
 
 A sample `.env` file looks like this, simple key-value pairs:
-`USERNAME=<insert value here>`
-`PASSWORD=<insert value here>`
-`PORT=<insert value here>`
-`DATABASE=<insert value here>`
-`SECRET=<insert value here>`
+```dosini
+USERNAME=<insert username here>
+PASSWORD=<insert password here>
+DATABASE=<insert database here>
+PORT=<insert database here>
+SECRET_KEY=<insert password here>
+```
+
+#### WARNING with `.env`
+DO NOT commit/push your `.env` file to git because your credentials will be leaked. This file should be hidden for local use only. <br />
+
+Make sure to have a `.gitignore` file and add `.env` to it to make sure that when you commit/push changes, `.env` is not committed and pushed to the repo accidently.  <br /> 
 
 For more information on the `.env` file and how to use environment variables and their purpose, please read their documentation here: https://github.com/motdotla/dotenv
 
