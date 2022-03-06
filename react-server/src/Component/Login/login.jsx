@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
+import Alert from '../Alert/alert';
 import './login.css';
 import axios from 'axios';
 
@@ -7,6 +8,10 @@ const Login = () => {
 
     const [email, updateEmail] = useState("");
     const [password, updatePassword] = useState("");
+    const [alert, updateAlert] = useState({
+        type: ''
+    }); 
+
     const navigate = useNavigate();
 
     const formHandler = async (e) => {
@@ -33,18 +38,37 @@ const Login = () => {
                 localStorage.setItem('token', loginTokenRequest.data.token);
                 navigate("/");
             }
+            else {
+                updateAlert((prevState) => {
+                    return {
+                        ... prevState,
+                        type: "LOG_IN_FAILURE"
+                    }
+                });
+            }
         }
         catch (err) {
             console.log(err);
+            updateAlert((prevState) => {
+                return {
+                    ... prevState,
+                    type: "LOG_IN_FAILURE"
+                }
+            });
         }
     }  
-     
+
+    let alertHandler = (
+        <Alert alertType={alert.type} />
+    )
+
     if (localStorage.getItem('token')) {
         return <Navigate to="/" />
     }
     else {
         return (
             <div className="login-form">
+                {alertHandler}
                 <div class="container login-container">
                     <h4 class="login-form-title">Login Form</h4>
                     <form class="login-form" onSubmit={formHandler}>
