@@ -17,6 +17,20 @@ The page will reload if you make edits. You will also see any lint errors in the
 Launches the back-end node server to activate the db models, routes, protected routes, JWT activation, validation, and MongoDB connection.<br />
 Run `node server.js` within the node server folder to spin up the server on port 5050. [http://localhost:5050](http://localhost:5050).
 
+## Libraries/Technologies used
+`axios`
+`bcryptjs`
+`cors`
+`dotenv`
+`express`
+`jsonwebtoken`
+`localstorage`
+`mongodb`
+`mongoose`
+`react-router`
+`react-router-dom`
+`react-redux`
+`redux`
 
 ## Learn More
 
