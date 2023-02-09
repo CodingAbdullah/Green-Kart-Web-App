@@ -1,4 +1,4 @@
-const axios  = require('axios');
+import axios from 'axios';
 
 // Creating a login function with global state passed in to verify user
 const login = async (state) => {
@@ -17,7 +17,6 @@ const login = async (state) => {
 }
 
 const logout = async () => {
-
     // Remove the user from localStorage and return
     localStorage.removeItem('user');
 }

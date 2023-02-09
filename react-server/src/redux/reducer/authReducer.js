@@ -2,77 +2,72 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from '../service/authService';
 
 // Create async thunk functions for dispatching actions
-// Check localstorage if token already exists, if so.. assign to initial state
+// Check localstorage if token already exists. If so, assign to initial state
 
-let userStorage = localStorage.getItem('user');
+let user = localStorage.getItem('user');
 
 export const login = createAsyncThunk('auth/login', async (state, thunkAPI) => {
-
     try {
         return authService.login(state)
     }
     catch (err) {
-        return thunkAPI.createWithValue(err);
+        return thunkAPI.rejectWithValue(err);
     }
 });
 
 // Create async thunk function for logout
-
-export const logout = createAsyncThunk('auth/logout', async(_, thunkAPI) => {
-    try {
-        authService.logout();
-    }
-    catch (err) {
-        return thunkAPI.createWithValue(err);
-    }
+export const logout = createAsyncThunk('auth/logout', async() => {
+    return authService.logout();
 });
 
-
-const authSlice = createSlice({
-    name: 'auth',
-    initialState: {
-        user: userStorage ? JSON.parse(userStorage) : null,
-        token: null,
+let authSlice = createSlice({
+    name : 'auth',
+    initialState : {
+        user: user ? JSON.parse(user) : null,
         isLoading: false,
-        isError: false,
-        isSuccess: false
+        isSuccess: false,
+        error: false,
+        token: null
     },
     reducers : {
+        // Reset indicators to empty values
         reset : (state) => {
-            state.user = null;
-            state.token = null;
             state.isLoading = false;
-            state.isError = false;
+            state.error = false;
             state.isSuccess = false;
         }
     },
     extraReducers : (builder) => {
         builder.addCase(login.pending, (state) => {
             state.user = null;
-            state.token = null;
             state.isLoading = true;
-            state.isError = false;
             state.isSuccess = false;
-        })
-        .addCase(login.success, (state, action) => {
-            state.user = action.payload.user;
-            state.token = action.payload.token;
-            state.isError = false;
-            state.isLoading = false;
-            state.isSuccess = true;
-        })
-        .addCase(login.rejected, (state) => {
-            state.user = null;
+            state.error = false;
             state.token = null;
-            state.isError = true;
+        })
+        .addCase(login.fulfilled, (state, action) => {
+            state.user = action.payload.user;
             state.isLoading = false;
-            state.isSuccess = false
+            state.error = false;
+            state.isSuccess = true;
+            state.token = action.payload.token;
+        })
+        .addCase(login.rejected, (state, action) => {
+            state.user = null;
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.error = action.error;
+            state.token = null;
+        })
+        .addCase(logout.fulfilled, (state) => {
+            state.user = null;
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.error = false;
+            state.token = null;
         })
     }
 });
 
 export const { reset } = authSlice.actions; // Export action (reset)
-
-let authReducer = authSlice.Reducer;
-
-export default authReducer; // Export as a default, the reducer
+export default authSlice.reducer; // Export as a default, the reducer
