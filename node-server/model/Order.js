@@ -6,11 +6,7 @@ const orderSchema = new Schema({
         required: true,
         type: mongoose.ObjectId
     },
-    date : {
-        required: true,
-        type: Date,
-    },
-    order_descriptsion : {
+    order_description : {
         required: true,
         type: Object
     },

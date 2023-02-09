@@ -26,7 +26,7 @@ exports.getAuthorization = (req, res) => {
 */
 
 exports.signUpFormValidation = (req, res) => {    
-    const { firstName, lastName, age, email, password, address, gender } = req.body;
+    const { firstName, lastName, age, email, password, address, gender } = JSON.parse(req.body.body);
 
     User.findOne({ email: { $eq : email }}).then((result) => {
         if (result){
@@ -75,7 +75,7 @@ exports.signUpFormValidation = (req, res) => {
 }
 
 exports.loginFormValidation = (req, res) => {
-    const { email, password } = req.body.user;
+    const { email, password } = JSON.parse(req.body.body.user);
 
     User.findOne({ email : { $eq : email }}).then(result => {
         const userInfoResult = result;

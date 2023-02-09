@@ -3,7 +3,7 @@ const Order = require("../model/Order");
 exports.getOrderHistory = (req, res) => {
     console.log(req.user);
 
-    const { userId } = req.user;
+    const { userId } = JSON.parse(req.body.body);
 
     Order.find({ user_id : { $eq : userId }}).then(result => {
         console.log(result);
@@ -21,8 +21,8 @@ exports.getOrderHistory = (req, res) => {
 }
 
 exports.orderCheckout = (req, res) => {
-   const { userId } = req.user;
-   const cart = req.body;
+   const { userId } = JSON.parse(req.body.body);
+   const cart = JSON.parse(req.body.body);
 
    console.log(cart);
    let totalCost = 0.0;
@@ -33,7 +33,6 @@ exports.orderCheckout = (req, res) => {
     
     const insertCart = {
         user_id: userId,
-        date: new Date().getTime(),
         order_description : {...cart},
         total_cost: totalCost
     }
