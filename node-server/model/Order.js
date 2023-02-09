@@ -10,14 +10,18 @@ const orderSchema = new Schema({
         required: true,
         type: Date,
     },
-    order_description : {
+    order_descriptsion : {
         required: true,
         type: Object
     },
     total_cost : {
         required: true,
         type: Number
+    },
+    },
+    { 
+        timestamps: true
     }
-});
+);
 
 module.exports = mongoose.model("Order", orderSchema);

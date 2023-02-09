@@ -31,6 +31,10 @@ const User = new Schema({
         required: true,
         type: String
     }
+}
+,
+{
+    timestamps: true
 });
 
 module.exports = mongoose.model("User", User);

@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 exports.auth = (req, res, next) => {
     
-    const token = req.headers.authorization.split(" ")[1]; // Format is x-auth-token: Bearer <token>
+    const token = req.headers.Authorization.split(" ")[1]; // Format is x-auth-token: Bearer <token>
 
     if (!token) {
         res.status(400).json({
