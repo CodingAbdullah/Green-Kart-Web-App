@@ -16,7 +16,7 @@
     "concurrently": "^7.6.0",
     "config": "^3.3.9",
     "dotenv": "^16.0.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "font-awesome": "^4.7.0",
     "gravatar": "^1.8.0",
     "mongoose": "^6.2.4",
