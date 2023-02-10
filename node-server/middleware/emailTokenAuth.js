@@ -20,11 +20,13 @@ exports.verifyEmailtoken = (req, res, next) => {
                     });
                 }
                 else {
-                    if (decoded === token) {
-                        next(); // If user entered the same uuid verification token as what was encoded into the JWT, move to the next piece of middleware
+                    // Check to see if the uuid encoded into the JWT equates to what verification code user provided. If equal, proceed to next middleware
+                    if (decoded.data === token) {
+                        next();
                     }
                     else {
-                        res.status(400).json({
+                        // Otherwise, reject password reset request
+                        res.status(403).json({
                             message: "Invalid verification code"
                         });
                     }

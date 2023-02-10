@@ -42,7 +42,7 @@ exports.signUpFormValidation = (req, res) => {
                                 });
                             })
                             .catch(err => {
-                                res.status(401).json({
+                                res.status(400).json({
                                     msg: err + '. Error saving user to db'
                                 });
                             });                      
@@ -214,6 +214,7 @@ exports.updateUserPassword = (req, res) => {
                     })
                 }
                 else {
+                    // Update user with the new hashed password
                     User.updateOne({ email }, { $set : { password: hash }})
                     .then(() => {
                         // If user is updated with latest password, remove Email Token

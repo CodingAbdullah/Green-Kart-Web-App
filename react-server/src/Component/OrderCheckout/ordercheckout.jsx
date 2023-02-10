@@ -5,6 +5,7 @@ import axios from 'axios';
 import { resetCart } from '../../redux/reducer/cartReducer';
 import { logout } from '../../redux/reducer/authReducer';
 import { useDispatch } from 'react-redux';
+import Alert from '../Alert/alert';
 
 import './ordercheckout.css';
 
@@ -106,6 +107,7 @@ const OrderCheckout = () => {
 
     return (
         <div className="table-form">
+            { alert !== '' ? <Alert alertType={ alert } /> : null }
             <div class="container table-container">
                 <div>
                     <h5 className="inventory-title-checkout">Your List of Items for Checkout</h5>

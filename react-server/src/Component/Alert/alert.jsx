@@ -15,7 +15,7 @@ const Alert = (props) => {
             type = "success";
             break;
         case "LOG_IN_FAILURE":
-            message = "Login was unsuccessful";
+            message = "Login was unsuccessful!";
             type = "danger";
             break;
         case "GOOD_CHECKOUT":
@@ -33,6 +33,26 @@ const Alert = (props) => {
         case "BAD_UPDATE":
             message = "User profile could not be updated!";
             type = 'danger';
+            break;
+        case "GMAIL_ADDRESS_ONLY":
+            message = "Only GMAIL addresses supported at this time!";
+            type = 'warning';
+            break;
+        case "INVALID_EMAIL_OR_INTERNAL_ERROR":
+            message = "Could not provide verification code, invalid email!";
+            type = 'danger';
+            break;
+        case "INVAILD_EMAIL_VERIFICATION_CODE":
+            message = "Invalid verification code!";
+            type = 'danger';
+            break;
+        case "SUCCESSFUL_RESET":
+            message = "Password successfully reset!";
+            type = 'success';
+            break;
+        case "VERIFICATION_CODE_SENT":
+            message = "Verification code sent!";
+            type = 'success';
             break;
         default:
             break;

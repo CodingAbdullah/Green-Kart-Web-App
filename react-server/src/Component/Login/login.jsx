@@ -32,7 +32,7 @@ const Login = () => {
         else if (errorSelector) {
             updateAlert("LOG_IN_FAILURE");
         }
-    }, [userSelector]);
+    }, [userSelector, errorSelector]);
 
     const formHandler = async (e) => {
         // Client side validation has already taken place
@@ -43,13 +43,9 @@ const Login = () => {
         dispatch(login({ email, password }));
     }  
 
-    let alertHandler = (
-        <Alert alertType={alert.type} />
-    )
-
     return (
         <div className="login-form">
-            { alertHandler }
+            { alert === '' ? null : <Alert alertType={ alert } /> } 
             <div class="container login-container">
                 <h4 class="login-form-title">Login Form</h4>
                 <form class="login-form" onSubmit={ formHandler }>

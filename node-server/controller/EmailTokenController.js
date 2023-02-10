@@ -6,11 +6,10 @@ const EmailToken = require("../model/EmailToken");
 
 exports.addEmailToken = (req, res) => {
     const { email } = JSON.parse(req.body.body);
-
     let emailToken = uuid.v4(); // Set to v4. version of encoding
     let message = `The following is the code to reset your password. <b>It will expire in 5 minutes: ${emailToken}</b>`;
 
-    // Set up a transporter using nodemailer  to send emails with verification codes
+    // Set up a transporter using nodemailer to send emails with verification codes
     const transport = nodemailer.createTransport({
         service: 'gmail',
         auth : {
@@ -41,7 +40,7 @@ exports.addEmailToken = (req, res) => {
                 }
                 else {
                     // Sign a JWT to 5 minutes
-                    jwt.sign(emailToken, process.env.SECRET, { expiresIn: 5 * 60 }, (err, emailToken) => {
+                    jwt.sign({ data: emailToken }, process.env.SECRET, { expiresIn: 5 * 60 }, (err, jwtToken) => {
                         if (err) {
                             res.status(400).json({
                                 message: 'Cannot sign JWT token'
@@ -49,11 +48,12 @@ exports.addEmailToken = (req, res) => {
                         }
                         else {
                             // If JWT is signed and created, save to EmailToken Collection
-                            let newEmailToken = new EmailToken({ email, token: emailToken });
+                            let newEmailToken = new EmailToken({ email, token: jwtToken });
                             newEmailToken.save()
                             .then(() => {
                                 // Once email has been sent to user, send out the final response if verified or not
                                 transport.sendMail({
+                                    subject: 'GreenKart Reset Password',
                                     from: process.env.EMAIL,
                                     to: email,
                                     html: `<h1>Verification Code</h1>
