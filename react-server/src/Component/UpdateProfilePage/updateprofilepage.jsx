@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import Alert from '../Alert/alert';
 import axios from  'axios';
 
 const UpdateProfilePage = () => {
@@ -7,10 +8,10 @@ const UpdateProfilePage = () => {
     const [firstName, updateFirstName] = useState("");
     const [lastName, updateLastName] = useState("");
     const [age, updateAge] = useState(0);
-    const [email, updateEmail] = useState("");
     const [password, updatePassword] = useState("");
     const [address, updateAddress] = useState("");
     const [gender, updateGender] = useState("male"); 
+    const [alert, updateAlert] = useState("");
 
     const userSelector = useSelector(state => state.auth.user);
 
@@ -29,9 +30,12 @@ const UpdateProfilePage = () => {
         }
     }
 
-    const updateHandler = () => {
+    const updateHandler = (e) => {
+        // Prevent page refresh on submit prompt
+        e.preventDefault();
+
         // Set up body and options for request
-        let body = JSON.stringify({ firstName, lastName, age, address, gender });
+        let body = JSON.stringify({ firstName, lastName, age, address, gender, password });
 
         const options = {
             method: 'POST',
@@ -44,23 +48,22 @@ const UpdateProfilePage = () => {
 
         // Forward request to update user profile
         axios.post("http://localhost:5001/update-user-information", options)
-        .then(response => {
-
+        .then(() => {
+            updateAlert('GOOD_UPDATE');
         })
-        .catch(err => {
-
-        })
-
+        .catch(() => {
+            updateAlert('BAD_UPDATE');
+        });
     }
-
 
     return (
         <div className="signup-form">
+            { alert === '' ? null : <Alert alertType={ alert } /> }
             <div class="container signup-container">
                 <h4 class="sign-form-title">Update Profile</h4>
                 <p style={ styles.link }>Enter in what like to change, passwords need to match to verify changes!
                     To change passwords, visit <a style={ styles.link } href="/forgot-reset-password">forgot/reset password page</a></p>
-                <p style={ styles.link }>Updating emails is not allowed. Please a new account instead</p>
+                <p style={ styles.link }>Updating emails is not allowed. Please a new account instead.</p>
                 <form class="sign-form" onSubmit={ updateHandler }>
                     <div class="form-group">
                         <input style={{ marginTop: '0.6rem' }} onChange={ e => updateFirstName(e.target.value) } name="firstName" type="text" class="form-control" placeholder="First Name" />
@@ -69,7 +72,7 @@ const UpdateProfilePage = () => {
                         <input style={{ marginTop: '0.6rem' }} onChange={ e => updateLastName(e.target.value) } name="lastName" type="text" class="form-control" placeholder="Last Name" />
                     </div>
                     <div class="form-group">
-                        <input style={{ marginTop: '0.6rem' }} onChange={ e => updateAge(e.target.value) } name="age" type="number" min="18" class="form-control" placeholder="Age" />
+                        <input style={{ marginTop: '0.6rem' }} onChange={ e => updateAge(e.target.value) } name="age" type="number" min="0" class="form-control" placeholder="Age" />
                     </div>
                     <div class="form-group">
                         <input style={{ marginTop: '0.6rem' }} onChange={ e => updateAddress(e.target.value) } name="address" type="text" class="form-control" placeholder="Address" />
@@ -86,7 +89,12 @@ const UpdateProfilePage = () => {
                         <label style={ styles.link }>To verify changes, enter your password to document changes</label>
                         <input style={{ marginTop: '0.6rem' }} onChange={ e => updatePassword(e.target.value) } name="password" type="password" class="form-control" placeholder="Password" required />
                     </div>
-                    <button style={ styles.updateButton } type="submit" class="btn btn-success">Verify Changes</button>
+                     {
+                        alert === "GOOD_UPDATE" ? 
+                            <button style={ styles.updateButton } disabled type="submit" class="btn btn-success">Verify Changes</button>
+                            :
+                            <button style={ styles.updateButton } type="submit" class="btn btn-success">Verify Changes</button>
+                     }
                 </form>
             </div>
         </div>

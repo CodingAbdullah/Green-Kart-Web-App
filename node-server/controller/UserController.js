@@ -136,7 +136,85 @@ exports.loginFormValidation = (req, res) => {
 }
 
 exports.updateUserInformation = (req, res) => {
+    // Firstly, verify if passwords match. If so, proceed to make changes
+    // Check to see if password matches bcrypt version stored in database
 
-// Code goes here..
+    const { firstName, lastName, age, address, gender, password } = req.body.body;
+    const { email }  = req.body.body.user; // Obtain user from decoded jwt token
 
+    // A user will always exist
+    User.find({ email }, (err, result) => {
+        if (err) {
+            res.status(400).json({
+                message : "Cannot query for users"
+            });
+        }
+        else {
+            bcrypt.compare(password, result[0].password, (err, result) => {
+                if (err) {
+                    res.status(400).json({
+                        message: "Cannot compare passwords"
+                    });
+                }
+                else {
+                    // If passwords match, proceed to update user profile, check parameters and adjust the update object accordingly
+                    if (result) {
+                        let updateObject = {};
+
+                        if (address.trim().length === 0 && age === 0) {
+                            updateObject = {
+                                firstName: firstName === '' ? result[0].firstName : firstName,
+                                lastName: lastName === '' ? result[0].lastName : lastName,
+                                gender
+                            }
+                        }
+                        else if (address.trim().length === 0){
+                            updateObject = {
+                                firstName: firstName === '' ? result[0].firstName : firstName,
+                                lastName: lastName === '' ? result[0].lastName : lastName,
+                                age: age,
+                                gender
+                            }
+                        }
+                        else if (age === 0){
+                            updateObject = {
+                                firstName: firstName === '' ? result[0].firstName : firstName,
+                                lastName: lastName === '' ? result[0].lastName : lastName,
+                                address: address,
+                                gender
+                            }
+                        }
+                        else {
+                            updateObject = {
+                                firstName: firstName === '' ? result[0].firstName : firstName,
+                                lastName: lastName === '' ? result[0].lastName : lastName,
+                                address,
+                                age,
+                                gender
+                            } 
+                        }
+
+                        // Pass in object to the set parameter to update user
+                        User.updateOne({ email }, { $set: updateObject }, (err, result) => {
+                            if (err) {
+                                res.status(400).json({
+                                    message: "Cannot update user"
+                                });
+                            }
+                            else {
+                                res.status(200).json({
+                                    message: "User was updated successfully"
+                                });
+                            }
+                        })
+                    }
+                    else {
+                        res.status(401).json({
+                            message: "Passwords do not match"
+                        });
+                    }
+                }
+            });
+        }
+    });
 }

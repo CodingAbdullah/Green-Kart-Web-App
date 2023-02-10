@@ -21,9 +21,19 @@ const Alert = (props) => {
         case "GOOD_CHECKOUT":
             message = "Items have been checkout!";
             type = 'success';
+            break;
         case "BAD_CHECKOUT":
             message = "Items were not checked out!";
             type = 'danger';
+            break;
+        case "GOOD_UPDATE":
+            message = "User profile was updated!";
+            type = 'success';
+            break;
+        case "BAD_UPDATE":
+            message = "User profile could not be updated!";
+            type = 'danger';
+            break;
         default:
             break;
     }
