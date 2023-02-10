@@ -98,7 +98,7 @@ const ProductGrid = () => {
                 <div className="product-grid col-centered">
                     <div className="container">
                         <h5 className="inventory-title">Inventory (Maximum five per item)</h5>
-                        <div className="row mx-auto">
+                        <div className="row">
                             {
                                 productList.map(item => 
                                     <ProductCard key={ item.id } product={ item }
