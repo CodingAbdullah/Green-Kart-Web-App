@@ -17,6 +17,13 @@ const Login = () => {
     const userSelector = useSelector(state => state.auth.user);
     const errorSelector = useSelector(state => state.auth.error);
 
+    const style = {
+        "reset-password-link" : {
+            color: 'green',
+            fontFamily: 'Permanent Marker, cursive'
+        }
+    }
+
     // Re-render the page whenever the global state is updated
     useEffect(() => {
         if (userSelector !== null) {
@@ -52,6 +59,8 @@ const Login = () => {
                     <div style={{marginTop: '2.5rem'}} class="form-group">
                         <input onChange={ e => updatePassword(e.target.value) } name="password" type="password" class="form-control" placeholder="Password" required />
                     </div>
+                    <a style={ style['reset-password-link'] } href="/reset-password-page">Reset Password</a>
+                    <br />
                     <button type="submit" class="btn login-button btn-success">Login</button>
                 </form>
             </div>

@@ -3,28 +3,6 @@ const User =  require("../model/User");
 const bcrypt = require("bcryptjs");
 const jwt  = require("jsonwebtoken");
 
-/*
-exports.getAuthorization = (req, res) => {
-    
-    if (req.user._id){
-        User.findById(req.user._id, (err, user) => {
-            if (err){
-                res.status(400).json({message : "INVALID"});
-            }
-            else {
-                const User = { _id: user._id, firstName: user.firstName, lastName: user.lastName, age: user.age,
-                email: user.email, address: user.address, gender: user.gender };
-
-                res.status(200).json({ User });
-            }
-        });
-    }
-    else {
-        res.status(400).json({message : "INVALID"});
-    }
-}
-*/
-
 exports.signUpFormValidation = (req, res) => {    
     // Parse information and represent the attributes for sign up and perform validation
     const { firstName, lastName, age, email, password, address, gender } = JSON.parse(req.body.body);
@@ -172,7 +150,7 @@ exports.updateUserInformation = (req, res) => {
                             updateObject = {
                                 firstName: firstName === '' ? result[0].firstName : firstName,
                                 lastName: lastName === '' ? result[0].lastName : lastName,
-                                age: age,
+                                age,
                                 gender
                             }
                         }
@@ -180,7 +158,7 @@ exports.updateUserInformation = (req, res) => {
                             updateObject = {
                                 firstName: firstName === '' ? result[0].firstName : firstName,
                                 lastName: lastName === '' ? result[0].lastName : lastName,
-                                address: address,
+                                address,
                                 gender
                             }
                         }
@@ -217,4 +195,8 @@ exports.updateUserInformation = (req, res) => {
             });
         }
     });
+}
+
+exports.updateUserPassword = (req, res) => {
+    // Code goes here..
 }

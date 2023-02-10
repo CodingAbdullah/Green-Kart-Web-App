@@ -3,9 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const URI = "mongodb+srv://greenKartDB:" + process.env.DB_PASSWORD + "@greenkartdb.r0botm9.mongodb.net/?retryWrites=true&w=majority"; // Add Mongo URL for mongoose connection
 const cors = require("cors");
-const userRouter = require("./router/userRouter");
-const vegetableRouter = require("./router/vegetableRouter");
+const emailTokenRouter = require("./router/emailTokenRouter");
 const orderRouter = require("./router/orderRouter");
+const userRouter = require("./router/userRouter");
 
 // Sign up a node server
 const app = express();
@@ -21,6 +21,6 @@ mongoose.connect(URI).then(() => console.log("Successful connection to DB")).cat
 
 // Routes set to Node server
 app.use(cors());
-app.use("/", userRouter);
+app.use("/", emailTokenRouter);
 app.use("/", orderRouter);
-app.use("/", vegetableRouter);
+app.use("/", userRouter);

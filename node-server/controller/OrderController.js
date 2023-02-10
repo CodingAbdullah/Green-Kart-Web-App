@@ -13,7 +13,7 @@ exports.getOrderHistory = (req, res) => {
         res.status(400).json({
             msg: err
         });
-    })
+    });
 }
 
 exports.orderCheckout = (req, res) => {
@@ -44,5 +44,5 @@ exports.orderCheckout = (req, res) => {
         res.status(400).json({
             msg: err
         });
-    })
+    });
 }

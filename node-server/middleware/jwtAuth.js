@@ -1,7 +1,7 @@
 require("dotenv").config({ path : '../.env' });
 const jwt = require("jsonwebtoken");
 
-exports.auth = (req, res, next) => {
+exports.verifyJwtToken = (req, res, next) => {
     const token = req.body.headers.Authorization.split(" ")[1]; // Format is Authorization: Bearer <token>
 
     if (!token) {

@@ -12,6 +12,7 @@ import OrderCheckout from './Component/OrderCheckout/ordercheckout';
 import OrderHistory from './Component/OrderHistory/orderhistory';
 import Logout from './Component/Logout/logout';
 import UpdateProfilePage from './Component/UpdateProfilePage/updateprofilepage';
+import ResetPasswordPage from './Component/ResetPasswordPage/resetpasswordpage';
 
 const App = () => {
   
@@ -25,6 +26,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/logout" element={<Logout />}></Route>
               <Route path="/order-history" element={<OrderHistory />} />
+              <Route path="/reset-password-page" element={<ResetPasswordPage />}></Route>
               <Route path="/signup" element={<SignUp />} />
               <Route path="/product-pricing" element={<ProductGrid />} />
               <Route path="/update-profile-info" element={<UpdateProfilePage />}></Route>
