@@ -31,14 +31,9 @@ const Login = () => {
         // Client side validation has already taken place
         e.preventDefault();
         e.target.reset();
-        
-        const information = JSON.stringify({
-            "email" : email,
-            "password" : password
-        });
 
         // Dispatch login action
-        dispatch(login({ information }));
+        dispatch(login({ email, password }));
     }  
 
     let alertHandler = (

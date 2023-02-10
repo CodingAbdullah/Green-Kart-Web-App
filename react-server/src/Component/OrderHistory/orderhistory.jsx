@@ -79,7 +79,7 @@ const OrderHistory = () =>  {
                                                     <tr>
                                                         <td>{ item.order_description[food].name }</td>
                                                         <td>{ item.order_description[food].quantity }</td>
-                                                        <td>{ price}</td>
+                                                        <td>{ price }</td>
                                                     </tr>
                                                 )
                                             })

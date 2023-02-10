@@ -2,6 +2,8 @@ import axios from 'axios';
 
 // Creating a login function with global state passed in to verify user
 const login = async (state) => {
+
+    // Send state object for login verification
     const options = {
         method: 'POST',
         body: JSON.stringify(state),
@@ -10,6 +12,7 @@ const login = async (state) => {
         }
     }
     
+    // Obtain the response and check if value is acceptable
     const response = await axios.post('http://localhost:5001/login', options)
 
     localStorage.setItem('user', JSON.stringify(response.data));

@@ -38,7 +38,7 @@ const Signup = () => {
 
         const options = {
             method: 'POST',
-            body : JSON.stringify(information),
+            body : information,
             headers: {
               'Content-Type': 'application/json'
             }

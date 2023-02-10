@@ -20,12 +20,12 @@ const OrderCheckout = () => {
     let table = (
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total Cost of Item</th>
-                </tr>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Cost of Item</th>
+                    </tr>
                 </thead>
                 <tbody>
                 { cartSelector.map(item => {

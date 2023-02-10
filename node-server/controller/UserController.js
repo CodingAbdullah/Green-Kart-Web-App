@@ -26,16 +26,22 @@ exports.getAuthorization = (req, res) => {
 */
 
 exports.signUpFormValidation = (req, res) => {    
+    // Parse information and represent the attributes for sign up and perform validation
     const { firstName, lastName, age, email, password, address, gender } = JSON.parse(req.body.body);
 
-    User.findOne({ email: { $eq : email }}).then((result) => {
-        if (result){
+    User.findOne({ email: { $eq : email }}, (err, result) => {
+        if (err){
             res.status(400).json({
-                message: "User already exists!"
+                message: "Cannot query for users"
             });
         }
+        else if (result) {
+            res.status(403).json({
+                message: "User already exists!"
+            }); 
+        } 
         else {
-            bcrypt.genSalt((err, salt) => {
+            bcrypt.genSalt(10, (err, salt) => {
                 if (err){
                     res.status(400).json({
                         msg: err + ". Salting error"
@@ -44,6 +50,7 @@ exports.signUpFormValidation = (req, res) => {
                 else {
                     bcrypt.hash(password, salt, (err, hash) => {
                         if (err){
+                            console.log("Hash: " + err);
                             res.status(400).json({
                                 msg: err + ". Hashing error"
                             });
@@ -51,12 +58,13 @@ exports.signUpFormValidation = (req, res) => {
                         else {
                             const newUser = new User({ firstName: firstName, lastName: lastName, age: age, email: email, password: hash, address: address, gender: gender.toLowerCase() });
                             newUser.save()
-                            .then(() => {                                
+                            .then(() => {                              
                                 res.status(201).json({
                                     msg: 'Successfully signed up user'
                                 });
                             })
                             .catch(err => {
+                                console.log(err);
                                 res.status(401).json({
                                     msg: err + '. Error saving user to db'
                                 });
@@ -67,59 +75,62 @@ exports.signUpFormValidation = (req, res) => {
             });
         }
     })
-    .catch(err => {
-        res.status(401).json({
-            msg: err + ". Couldn't perform user search operation"
-        });
-    });
 }
 
 exports.loginFormValidation = (req, res) => {
-    const { email, password } = JSON.parse(req.body.body.user);
+    const { email, password } = JSON.parse(req.body.body);
 
-    User.findOne({ email : { $eq : email }}).then(result => {
-        const userInfoResult = result;
-        const { firstName, lastName, email } = result;
-
-        if ( userInfoResult ){
-            bcrypt.compare(password, userInfoResult.password, (err, result) => {
-                if (err){
-                    res.status(401).json({
-                        message: 'Cannot encrypt password. Wrong password'
-                    });
-                }
-                else {
-                    if (result){
-                        jwt.sign({ userId: userInfoResult._id, firstName: firstName, lastName: lastName, email: email }, process.env.SECRET, { expiresIn: 3600 }, (err, token) => {
-                            if (err){
-                                res.status(401).json({
-                                    msg: err + ". Error signing token"
-                                });
-                            }
-                            else {
-                                res.status(201).json({ 
-                                    token 
-                                });
-                            }
-                        });
-                    }
-                    else {
-                        res.status(500).json({
-                            message: "Something wrong with result, couldn't verify account"
-                        });
-                    }
-                }
+    User.find({ email : { $eq : email }}, (err, result) => {
+        if (err){
+            res.status(400).json({
+                message: "Cannot query for users right now " + err
             });
         }
         else {
-            res.status(401).json({ 
-                message: "Cannot interpretate user info" 
-            });
+            if (result.length > 0) {
+                // Grab the first and only user information from result array
+                let firstName = result[0].firstName;
+                let lastName = result[0].lastName;
+                let email = result[0].email;
+                let id = result[0]._id;
+
+                // Compare passwords to validate input
+                bcrypt.compare(password, result[0].password, (err, result) => {
+                    if (err){
+                        res.status(401).json({
+                            message: 'Cannot encrypt password. Wrong password'
+                        });
+                    }
+                    else {
+                        if (result){
+                            // If passwords match, sign a JWT token and attach it as a response
+                            jwt.sign({ userId: id, firstName: firstName, lastName: lastName, email: email }, process.env.SECRET, { expiresIn: 3600 }, (err, token) => {
+                                if (err){
+                                    res.status(401).json({
+                                        msg: err + ". Error signing token"
+                                    });
+                                }
+                                else {
+                                    res.status(201).json({ 
+                                        user: { firstName, lastName, email },
+                                        token: token 
+                                    });
+                                }
+                            });
+                        }
+                        else {
+                            res.status(400).json({
+                                message: "Passwords don't match!"
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                res.status(401).json({ 
+                    message: "Wrong username, no such user exists" 
+                });
+            }
         }
     })
-    .catch(err => {
-        res.status(400).json({
-            msg: err
-        });
-    });
 }
