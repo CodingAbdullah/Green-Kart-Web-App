@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+
+.inventory-title-checkout {
+    color: lightgreen;
+    font-family: 'Permanent Marker', 'cursive';
+    margin-top: 30px;
+}
+
 .table {
     margin-top: 2.5rem;
     margin-left: auto;
@@ -5,8 +14,15 @@
     width: 75%;
     background-color: lightgreen;
     border: 5px solid green;
+    font-family: 'Permanent Marker', 'cursive';
+
 }
 
 .table:hover {
     background-color: greenyellow;
+}
+
+.checkout-button {
+    font-family: 'Permanent Marker', 'cursive';
+    color: white;
 }
