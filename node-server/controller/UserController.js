@@ -1,5 +1,6 @@
 require("dotenv").config({ path : '../.env'});
 const User =  require("../model/User");
+const EmailToken = require('../model/EmailToken');
 const bcrypt = require("bcryptjs");
 const jwt  = require("jsonwebtoken");
 
@@ -28,7 +29,6 @@ exports.signUpFormValidation = (req, res) => {
                 else {
                     bcrypt.hash(password, salt, (err, hash) => {
                         if (err){
-                            console.log("Hash: " + err);
                             res.status(400).json({
                                 msg: err + ". Hashing error"
                             });
@@ -42,7 +42,6 @@ exports.signUpFormValidation = (req, res) => {
                                 });
                             })
                             .catch(err => {
-                                console.log(err);
                                 res.status(401).json({
                                     msg: err + '. Error saving user to db'
                                 });
@@ -198,5 +197,45 @@ exports.updateUserInformation = (req, res) => {
 }
 
 exports.updateUserPassword = (req, res) => {
-    // Code goes here..
+    const { email, password } = JSON.parse(req.body.body);
+
+    // Once Email Token is verified, simply hash password and updated User password
+    bcrypt.genSalt(10, (err, salt) => {
+        if (err){
+            res.status(400).json({
+                message: "Cannot generate salt"
+            });
+        }
+        else {
+            bcrypt.hash(password, salt, (err, hash) => {
+                if (err){
+                    res.status(400).json({
+                        message: "Cannot hash password"
+                    })
+                }
+                else {
+                    User.updateOne({ email }, { $set : { password: hash }})
+                    .then(() => {
+                        // If user is updated with latest password, remove Email Token
+                        EmailToken.deleteOne({ email })
+                        .then(() => {
+                            res.status(200).json({
+                                message: "Email Token deleted User password updated"
+                            });
+                        })
+                        .catch(() => {
+                            res.status(400).json({
+                                message: "User updated, but Email Token was not deleted"
+                            });
+                        });
+                    })  
+                    .catch(() => {
+                        res.status(400).json({
+                            message: "Could not save new password to db"
+                        });
+                    });
+                }
+            });
+        }
+    });
 }
