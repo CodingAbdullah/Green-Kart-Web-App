@@ -20,7 +20,7 @@ const cartSlice = createSlice({
         shoppingCart: cartStorage !== null ? JSON.parse(localStorage.getItem('cart')) : initialCart
     },
     reducers : {
-        reset : (state) => {
+        resetCart : (state) => {
             // Reset? Set shopping cart state to initialCart
             state.shoppingCart = initialCart;
             
@@ -37,7 +37,7 @@ const cartSlice = createSlice({
 });
 
 // Export actions from cart reducer
-export const { reset, updateCart } = cartSlice.actions;
+export const { resetCart, updateCart } = cartSlice.actions;
 
 // Export as default, the cart
 let cartReducer = cartSlice.reducer;

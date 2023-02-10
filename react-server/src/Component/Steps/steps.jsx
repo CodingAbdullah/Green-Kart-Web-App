@@ -12,21 +12,21 @@ const Steps = () => {
         <div className="stepbox">
             <div className="container">
                 <div className="row">
-                        <div className="card bg-success col-sm-12 col-md-6 col-lg-4">
+                        <div className="card first-card bg-success col-sm-12 col-md-4 col-lg-3">
                             <div className="card-body">
                                 <FontAwesomeIcon className="user-sign-up-icon" width="100px" height="100px" icon={faUserPlus}  size='5x' />
                                 <h5 className="card-title">Sign Up</h5>
                                 <p className="card-text">New? Don't worry we got you covered. Sign up is quick and easy. We ask of no charge for membership. It's free!</p>
                             </div>
                         </div>
-                        <div className="card bg-success col-sm-12 col-md-6 col-lg-4">
+                        <div className="card bg-success col-sm-12 col-md-4 col-lg-3">
                             <div className="card-body">
                                 <FontAwesomeIcon className="shop-icon" width="100px" height="100px" icon={ faShoppingCart }  size='5x' />
                                 <h5 className="card-title">Shop</h5>
                                 <p className="card-text">Surf our product pricing catalog and pick as many greenies as you'd like! Simple, quick and easy!</p>
                             </div>
                         </div>
-                        <div className="card bg-success col-sm-12 col-md-6 col-lg-4">
+                        <div className="card bg-success col-sm-12 col-md-4 col-lg-3">
                             <div className="card-body">
                                 <FontAwesomeIcon className="delivery-icon" width="100px" height="100px" icon={ faBoxOpen } size='5x' />
                                 <h5 className="card-title">Delivery</h5>

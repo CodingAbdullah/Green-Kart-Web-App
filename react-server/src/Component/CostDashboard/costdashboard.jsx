@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../CostDashboard/costdashboard.css';
 import { useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { reset } from '../../redux/reducer/cartReducer';
+import { resetCart } from '../../redux/reducer/cartReducer';
 
 const CostDashboard = () => {
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const CostDashboard = () => {
                 <label className="cost-label"> Total Unique Items: { uniqueItems }</label><br />
                 <button style={{ marginTop: '2rem' }} className="btn process-order btn-primary" onClick={ () => navigate("/checkout") } disabled={ quantity == 0 ? true : false }>Process Order</button>
                 <br />
-                <button className="btn process-order btn-danger" disabled = { cost === 0.0 ? true : false } onClick={ () => dispatch(reset()) }>Clear Cart</button>
+                <button className="btn process-order btn-danger" disabled = { cost === 0.0 ? true : false } onClick={ () => dispatch(resetCart()) }>Clear Cart</button>
             </div>
         </div>
     );

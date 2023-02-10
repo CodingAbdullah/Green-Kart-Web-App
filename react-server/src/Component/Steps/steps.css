@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
 
-.card{
+.card {
     border-color: white;
 }
 
@@ -21,6 +21,6 @@
     font-size: large;
 }
 
-.card:hover{
+.card:hover {
     background-color: greenyellow;
 }

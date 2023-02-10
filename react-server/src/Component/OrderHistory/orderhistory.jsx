@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 import './orderhistory.css';
 
 const OrderHistory = () =>  {
@@ -18,28 +19,26 @@ const OrderHistory = () =>  {
         }
         else {
             const options = {
-                method: 'get',
-                mode: 'cors',
-                'content-type' : 'application/json',
+                method: 'GET',
                 headers : {
+                    'content-type' : 'application/json',
                     'Authorization': 'Bearer ' + userSelector.token
                 }
             };
     
-            fetch("http://localhost:5001/order-history", options)
-            .then(response => response.json())
-            .then(res => {
-                console.log(res.orders);
+            axios.get("http://localhost:5001/order-history", options)
+            .then(response => {
+                console.log(response.data.orders);
                 updateOrderHistory(prevState => {
                     return {
                         ...prevState,
-                        orderHistory: res.orders
+                        orderHistory: response.data.orders
                     }
                 });
             })
             .catch(err => console.log(err));
         }
-    }, []);
+    }, [userSelector]);
 
     const homeHandler = () => {
         navigate("/");
