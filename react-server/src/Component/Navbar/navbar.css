@@ -3,30 +3,21 @@
 
 .italicK {
     font-family: 'Pacifico', 'cursive';
-    color: lightgreen;
+    color: white;
 }
 .nav-link {
     font-family: 'Sriracha', 'cursive';
+    padding-left: '2rem'
 }
 
 .navbar-brand {
     font-family: 'Sriracha', 'cursive';
 }
 
-@media (min-width: 768px) {
-    .navbar-brand.abs
-        {
-            position: absolute;
-            width: 100%;
-            left: 0;
-            text-align: center;
-        }
-    }
-
 a {
     color: white;
 }
 a:hover {
-    color: darkgreen;
+    color: white;
 }
 

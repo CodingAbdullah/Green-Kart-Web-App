@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProductGrid from './Component/ProductGrid/productgrid';
 import OrderCheckout from './Component/OrderCheckout/ordercheckout';
 import OrderHistory from './Component/OrderHistory/orderhistory';
+import Logout from './Component/Logout/logout';
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
           <Navbar />
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<Logout />}></Route>
               <Route path="/signup" element={<SignUp />} />
               <Route path="/product-pricing" element={<ProductGrid />} />
               <Route path="/order-history" element={<OrderHistory />} />

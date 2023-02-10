@@ -1,30 +1,27 @@
 import React from 'react';
 import './navbar.css';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
 
     let navBarRendering;
-    const navigate = useNavigate();
+    const userSelector = useSelector(state => state.auth.user);
 
-    const logoutHandler = () => {
-        localStorage.removeItem('token');
-        navigate("/");
-    }
-
-    if (localStorage.getItem('token')) {
+    if (userSelector !== null) {
         navBarRendering = (
-            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                <ul className="navbar-nav ml-auto">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav ml-auto text-white">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/orderHistory">Order History</Link>
+                        <a style={{ paddingLeft: '2rem' }} className="nav-link" href="/order-history">Order History</a>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/productPricing">Place Order</Link>
+                        <a className="nav-link" href="/product-pricing">Place Order</a>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/" onClick={logoutHandler}>Logout</Link>
+                        <a className="nav-link" href="/update-user-info">Update Account Profile</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>           
@@ -32,13 +29,13 @@ const Navbar = () => {
     }
     else {
         navBarRendering = (
-            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/login">Login</Link>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a style={{ paddingLeft: '2rem' }} class="nav-link" href="/login">Login</a>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/signup">Sign Up</Link>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Sign Up</a>
                     </li>
                 </ul>
             </div>
@@ -47,14 +44,9 @@ const Navbar = () => {
     
     return (  
         <div className="Navbar">
-            <nav className="navbar navbar-expand-lg bg-success">
-                    <div className="mx-auto order-0">
-                        <Link className="navbar-brand mx-auto" to="/"><i className="italicK">G</i>reen <i className="italicK">K</i>art</Link>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
-                {navBarRendering}
+            <nav style={{paddingLeft: '2rem'}} className="navbar navbar-expand-lg bg-success">
+                <a className="navbar-brand mx-auto" href="/"><i className="italicK">G</i>reen <i className="italicK">K</i>art</a>
+                { navBarRendering }
             </nav>
         </div>
     )

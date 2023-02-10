@@ -2,8 +2,7 @@ require("dotenv").config({ path : '../.env' });
 const jwt = require("jsonwebtoken");
 
 exports.auth = (req, res, next) => {
-    
-    const token = req.headers.Authorization.split(" ")[1]; // Format is x-auth-token: Bearer <token>
+    const token = req.body.headers.Authorization.split(" ")[1]; // Format is Authorization: Bearer <token>
 
     if (!token) {
         res.status(400).json({
@@ -18,7 +17,10 @@ exports.auth = (req, res, next) => {
                 });
             }
             else {
-                req.user = decoded;
+                // If verified, pass along the user data within the decoded part of the token to req and pass onto the next middleware
+                let ogReq = JSON.parse(req.body.body);
+                ogReq.user = decoded;
+                req.body.body = ogReq;
                 next();
             }
         });

@@ -20,8 +20,8 @@ const login = async (state) => {
 }
 
 const logout = async () => {
-    // Remove the user from localStorage and return
-    localStorage.removeItem('user');
+    // Instead of simply remove item, clear storage immediately as cart information will be stored here as well
+    localStorage.clear();
 }
 
 const authService = {

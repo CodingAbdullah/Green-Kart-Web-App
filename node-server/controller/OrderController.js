@@ -1,8 +1,6 @@
 const Order = require("../model/Order");
 
 exports.getOrderHistory = (req, res) => {
-    console.log(req.user);
-
     const { userId } = JSON.parse(req.body.body);
 
     Order.find({ user_id : { $eq : userId }}).then(result => {
@@ -24,7 +22,6 @@ exports.orderCheckout = (req, res) => {
    const { userId } = JSON.parse(req.body.body);
    const cart = JSON.parse(req.body.body);
 
-   console.log(cart);
    let totalCost = 0.0;
 
    for (var i = 0 ; i < cart.length; i++){
