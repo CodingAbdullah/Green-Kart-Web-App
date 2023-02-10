@@ -78,7 +78,6 @@ const Signup = () => {
         <Alert alertType={alert.type} />
     )
 
-
     return (
         <div className="signup-form">
             { alertHandler }
@@ -86,34 +85,30 @@ const Signup = () => {
                 <h4 class="sign-form-title">Sign Up Form</h4>
                 <form class="sign-form" onSubmit={ formHandler }>
                     <div class="form-group">
-                        <input onChange={ e => updateFirstName(e.target.value) } name="firstName" type="text" class="form-control" placeholder="First Name" required />
+                        <input style={{marginTop: '0.6rem'}} onChange={ e => updateFirstName(e.target.value) } name="firstName" type="text" class="form-control" placeholder="First Name" required />
                     </div>
                     <div class="form-group">
-                        <input onChange={ e => updateLastName(e.target.value) } name="lastName" type="text" class="form-control" placeholder="Last Name" required />
+                        <input style={{marginTop: '0.6rem'}} onChange={ e => updateLastName(e.target.value) } name="lastName" type="text" class="form-control" placeholder="Last Name" required />
                     </div>
                     <div class="form-group">
-                        <input onChange={ e => updateAge(e.target.value) } name="age" type="number" min="18" class="form-control" placeholder="Age" required />
+                        <input style={{marginTop: '0.6rem'}} onChange={ e => updateAge(e.target.value) } name="age" type="number" min="18" class="form-control" placeholder="Age" required />
                     </div>
                     <div class="form-group">
-                        <input onChange={ e => updateEmail(e.target.value) } name="email" type="email" class="form-control" placeholder="Email" required />
+                        <input style={{marginTop: '0.6rem'}} onChange={ e => updateEmail(e.target.value) } name="email" type="email" class="form-control" placeholder="Email" required />
                     </div>
                     <div class="form-group">
-                        <input onChange={ e => updatePassword(e.target.value) } name="password" type="password" class="form-control" placeholder="Password" required />
+                        <input style={{marginTop: '0.6rem'}} onChange={ e => updatePassword(e.target.value) } name="password" type="password" class="form-control" placeholder="Password" required />
                     </div>
                     <div class="form-group">
-                        <input onChange={ e => updateAddress(e.target.value) } name="address" type="text" class="form-control" placeholder="Address" required />
+                        <input style={{marginTop: '0.6rem'}} onChange={ e => updateAddress(e.target.value) } name="address" type="text" class="form-control" placeholder="Address" required />
                     </div>
-                    <div class="form-group row">
-                        <div class="form-check">
-                            <div class="col-sm-10">
-                                <input class="form-check-input" id="male-button" onChange={() => updateGender("male")} type="radio" name="gender" value="male" checked />
-                                <label class="form-check-label">Male</label>
-                            </div>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" id="female-button" onChange={() => updateGender("female")} type="radio" name="gender" value="female" />
-                            <label class="form-check-label">Female</label>
-                        </div>
+                    <div class="form-check">
+                        <input class="form-check-input" id="male-button" onChange={() => updateGender("male")} type="radio" name="gender" value="male" checked />
+                        <label class="form-check-label">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" id="female-button" onChange={() => updateGender("female")} type="radio" name="gender" value="female" />
+                        <label class="form-check-label">Female</label>
                     </div>
                     <button type="submit" class="btn signup-button btn-success">Sign Up</button>
                 </form>

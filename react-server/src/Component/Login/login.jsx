@@ -49,7 +49,7 @@ const Login = () => {
                     <div class="form-group">
                         <input onChange={ e => updateEmail(e.target.value) } name="email" type="email" class="form-control" placeholder="Email" required />
                     </div>
-                    <div class="form-group">
+                    <div style={{marginTop: '2.5rem'}} class="form-group">
                         <input onChange={ e => updatePassword(e.target.value) } name="password" type="password" class="form-control" placeholder="Password" required />
                     </div>
                     <button type="submit" class="btn login-button btn-success">Login</button>
