@@ -5,7 +5,6 @@ import axios from 'axios';
 import './orderhistory.css';
 
 const OrderHistory = () =>  {
-
     const navigate = useNavigate();
     const userSelector = useSelector(state => state.auth.user);
 
@@ -19,16 +18,17 @@ const OrderHistory = () =>  {
         }
         else {
             const options = {
-                method: 'GET',
+                method: 'POST',
+                body: JSON.stringify({ email: userSelector.user.email }),
                 headers : {
                     'content-type' : 'application/json',
                     'Authorization': 'Bearer ' + userSelector.token
                 }
             };
     
-            axios.get("http://localhost:5001/order-history", options)
+            // Retrieve user order history set headers
+            axios.post("http://localhost:5001/order-history", options)
             .then(response => {
-                console.log(response.data.orders);
                 updateOrderHistory(prevState => {
                     return {
                         ...prevState,
@@ -56,8 +56,9 @@ const OrderHistory = () =>  {
                 </thead>
                 { 
                     orders.orderHistory[0] && orders.orderHistory.map(item => {
-                        let day = item.date.split("T")[0];
-                        let time = item.date.split("T")[1].split(":")
+                        // Use the timestamp attribute assigned to model instead of custom date attribute
+                        let day = item.createdAt.split("T")[0];
+                        let time = item.createdAt.split("T")[1].split(":")
 
                         return (
                             <tr>

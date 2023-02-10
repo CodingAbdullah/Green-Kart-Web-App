@@ -3,15 +3,13 @@ const Order = require("../model/Order");
 exports.getOrderHistory = (req, res) => {
     const { email } = req.body.body.user;
 
+    // Retrieve all those orders belonging to user using email filter
     Order.find({ email : { $eq : email }}).then(result => {
-        console.log(result);
-
         res.status(200).json({
             orders: result
         });
     })
     .catch(err => {
-        console.log(err);
         res.status(400).json({
             msg: err
         });
@@ -40,11 +38,11 @@ exports.orderCheckout = (req, res) => {
     .then(response => {
         res.status(201).json({
             receipt: response 
-        })
+        });
     })
     .catch(err => {
         res.status(400).json({
             msg: err
-        })
+        });
     })
 }
