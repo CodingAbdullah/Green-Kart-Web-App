@@ -18,13 +18,19 @@ const Alert = (props) => {
             message = "Login was unsuccessful";
             type = "danger";
             break;
+        case "GOOD_CHECKOUT":
+            message = "Items have been checkout!";
+            type = 'success';
+        case "BAD_CHECKOUT":
+            message = "Items were not checked out!";
+            type = 'danger';
         default:
             break;
     }
-    
+     
     return (
         <div class={`alert alert-${type}`} role="alert">
-            {message}
+            { message }
         </div>
     )
 }

@@ -1,9 +1,9 @@
 const Order = require("../model/Order");
 
 exports.getOrderHistory = (req, res) => {
-    const { userId } = JSON.parse(req.body.body);
+    const { email } = req.body.body.user;
 
-    Order.find({ user_id : { $eq : userId }}).then(result => {
+    Order.find({ email : { $eq : email }}).then(result => {
         console.log(result);
 
         res.status(200).json({
@@ -19,21 +19,23 @@ exports.getOrderHistory = (req, res) => {
 }
 
 exports.orderCheckout = (req, res) => {
-   const { userId } = JSON.parse(req.body.body);
-   const cart = JSON.parse(req.body.body);
+    const { email } = req.body.body.user;
+    const cart = req.body.body.cart;
 
-   let totalCost = 0.0;
+    let totalCost = 0.0;
 
-   for (var i = 0 ; i < cart.length; i++){
-       totalCost += (cart[i].price)*(cart[i].quantity);
+    for (var i = 0 ; i < cart.length; i++){
+        totalCost += (cart[i].price)*(cart[i].quantity);
     }
     
+    // Set up document to insert into MongoDB
     const insertCart = {
-        user_id: userId,
-        order_description : {...cart},
+        email: email,
+        order_description : cart,
         total_cost: totalCost
     }
 
+    // Save document to database
     const newOrder = new Order(insertCart).save()
     .then(response => {
         res.status(201).json({
