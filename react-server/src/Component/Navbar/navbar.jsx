@@ -18,7 +18,7 @@ const Navbar = () => {
                         <a className="nav-link" href="/product-pricing">Place Order</a>
                     </li>
                     <li className="nav-item dropdown">
-                        <a className="nav-link" href="/update-user-info">Update Account Profile</a>
+                        <a className="nav-link" href="/update-profile-info">Update Account Profile</a>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link" href="/logout">Logout</a>

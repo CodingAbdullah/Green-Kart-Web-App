@@ -134,3 +134,9 @@ exports.loginFormValidation = (req, res) => {
         }
     })
 }
+
+exports.updateUserInformation = (req, res) => {
+
+// Code goes here..
+
+}

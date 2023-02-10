@@ -46,6 +46,7 @@ const OrderHistory = () =>  {
 
     return (
         <div>
+            <h5 className="inventory-title-checkout">User Order History</h5>
             <table class="table large-table">
                 <thead>
                     <tr>
@@ -91,7 +92,7 @@ const OrderHistory = () =>  {
                         )}
                 )}
             </table>
-            <button class="btn btn-success" onClick={ homeHandler }>Go Home</button>
+            <button class="btn btn-success order-history-button" onClick={ homeHandler }>Go Home</button>
         </div>
     )
 }
