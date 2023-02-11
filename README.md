@@ -1,7 +1,21 @@
 # Green Kart Web Application 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Full stack application using <b>Node, Express, MongoDB, React, Redux, and AWS. </b>
 
-## Available Scripts
+<br />
+
+## Start here
+A fun little project completed with boiler-plate code a couple of years ago, now fully upgraded with the latest version of React/Redux and in addition with new features:
+
+<ul>
+    <li>Product Order History</li>
+    <li>User Profile Upgrades</li>
+    <li>Password Resets with Verification codes via Email</li>
+    <li>Versatile Cart functionality (data persistance, clearing, and real-time notifications)</li>
+    <li>Enhanced validators filtering/validating data and protected routes to ensure security </li>
+</ul>
+<br>
+
+## Project Setup
 
 In this project directory, you will find two server folders, one to run the front-end and another for the back-end. This documentation will help with setup.
 
@@ -40,6 +54,8 @@ Launches the back-end node server to activate the db models, routes, protected r
 
 Run `node server.js` within the node server folder to spin up the server on port 5050. [http://localhost:5050](http://localhost:5050).
 
+<br />
+
 ## Libraries/Technologies used
 `axios`
 `bcryptjs`
@@ -50,12 +66,17 @@ Run `node server.js` within the node server folder to spin up the server on port
 `localstorage`
 `mongodb`
 `mongoose`
+`nodemailer`
 `react-router`
 `react-router-dom`
 `react-redux`
-`redux`
+`reduxjs/toolkit`
+`validator`
+`uuid`
 
-## Learn More
+<br/>
+
+## Learn More About React
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 To learn React, check out the [React documentation](https://reactjs.org/).
