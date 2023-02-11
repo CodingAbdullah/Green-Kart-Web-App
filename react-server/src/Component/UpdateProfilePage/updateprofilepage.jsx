@@ -86,7 +86,7 @@ const UpdateProfilePage = () => {
                         <label class="form-check-label">Female</label>
                     </div>
                     <div style={ styles.formGroup } class="form-group">
-                        <label style={ styles.link }>To verify changes, enter your password to document changes</label>
+                        <label style={ styles.link }>To verify changes, enter your password to document changes.</label>
                         <input style={{ marginTop: '0.6rem' }} onChange={ e => updatePassword(e.target.value) } name="password" type="password" class="form-control" placeholder="Password" required />
                     </div>
                      {

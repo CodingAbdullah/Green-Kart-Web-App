@@ -18,13 +18,15 @@ exports.verifyEmailtoken = (req, res, next) => {
                     // Delete token if expired
                     EmailToken.deleteMany({ email }, (err, result) => {
                         if (err) {
-                            res.status(403).json({
-                                message: "Cannot delete expired email token"
+                            res.status(200).json({
+                                message: "Cannot delete expired email token",
+                                isExpired: true
                             });
                         }
                         else {
-                            res.status(403).json({
-                                message: "Expired email token, deleted from database"
+                            res.status(200).json({
+                                message: "Expired email token, deleted from database",
+                                isExpired: true
                             });
                         }
                     });

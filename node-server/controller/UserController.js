@@ -221,7 +221,8 @@ exports.updateUserPassword = (req, res) => {
                         EmailToken.deleteOne({ email })
                         .then(() => {
                             res.status(200).json({
-                                message: "Email Token deleted User password updated"
+                                message: "Email Token deleted User password updated",
+                                isExpired: false
                             });
                         })
                         .catch(() => {

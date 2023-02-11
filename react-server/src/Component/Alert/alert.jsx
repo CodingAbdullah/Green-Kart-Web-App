@@ -54,6 +54,10 @@ const Alert = (props) => {
             message = "Invalid verification code!";
             type = 'danger';
             break;
+        case "VERIFICATION_CODE_EXPIRED":
+            message='Token has expired. Refresh page to request again!';
+            type = 'danger';
+            break;
         case "SUCCESSFUL_RESET":
             message = "Password successfully reset!";
             type = 'success';

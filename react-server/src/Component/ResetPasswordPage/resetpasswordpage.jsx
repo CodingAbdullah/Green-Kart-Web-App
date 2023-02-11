@@ -69,10 +69,16 @@ const ResetPasswordPage = () => {
 
         // Prepare request to update user password with user verification code and updated password
         axios.post("http://localhost:5001/update-user-password", options)
-        .then(() => {
+        .then((response) => {
             // If user has entered the correct verification code, password was reset and alerts should be present
-            updateIsVerificationCodeVerified(true);
-            updateResetAlert("SUCCESSFUL_RESET");
+            if ( response.data.isExpired ) {
+                updateResetAlert("VERIFICATION_CODE_EXPIRED");
+                updateIsVerificationCodeVerified(true);
+            }
+            else {
+                updateIsVerificationCodeVerified(true);
+                updateResetAlert("SUCCESSFUL_RESET");
+            }
         })
         .catch(() => {
             // If user enters an invalid verification code, notify User and alerts should be present
