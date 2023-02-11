@@ -15,8 +15,18 @@ exports.verifyEmailtoken = (req, res, next) => {
             // Get the first and only Email token associated with User
             jwt.verify(result[0].token, process.env.SECRET, (err, decoded) => {
                 if (err) {
-                    res.status(400).json({
-                         message: "Cannot verify token, expired"
+                    // Delete token if expired
+                    EmailToken.deleteMany({ email }, (err, result) => {
+                        if (err) {
+                            res.status(403).json({
+                                message: "Cannot delete expired email token"
+                            });
+                        }
+                        else {
+                            res.status(403).json({
+                                message: "Expired email token, deleted from database"
+                            });
+                        }
                     });
                 }
                 else {

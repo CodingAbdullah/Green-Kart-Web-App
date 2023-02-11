@@ -61,9 +61,9 @@ const UpdateProfilePage = () => {
             { alert === '' ? null : <Alert alertType={ alert } /> }
             <div class="container signup-container">
                 <h4 class="sign-form-title">Update Profile</h4>
-                <p style={ styles.link }>Enter in what like to change, passwords need to match to verify changes!
-                    To change passwords, visit <a style={ styles.link } href="/forgot-reset-password">forgot/reset password page</a></p>
-                <p style={ styles.link }>Updating emails is not allowed. Please a new account instead.</p>
+                <p style={ styles.link }>Enter in what you like to change, password will need to be entered to verify changes!
+                    To change passwords, logout and visit the <u>forgot/reset password page</u></p>
+                <p style={ styles.link }>Updating emails is not allowed. Please create a new account instead.</p>
                 <form class="sign-form" onSubmit={ updateHandler }>
                     <div class="form-group">
                         <input style={{ marginTop: '0.6rem' }} onChange={ e => updateFirstName(e.target.value) } name="firstName" type="text" class="form-control" placeholder="First Name" />

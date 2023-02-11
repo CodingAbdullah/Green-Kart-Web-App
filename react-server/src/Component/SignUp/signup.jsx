@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import './signup.css';
 import axios from 'axios';
 import Alert from '../Alert/alert';
+import validator from 'validator';
 import { useSelector } from 'react-redux';
 
 const Signup = () => {
@@ -27,35 +28,55 @@ const Signup = () => {
             navigate("/");
         }
     }, []);
+    
     const formHandler = async (e) => {
         e.preventDefault();
         e.target.reset();
 
-        // Perform signup operation...
-        const information = JSON.stringify({
-            firstName, lastName, age, email, password, address, gender
-        });
+        if (!validator.isEmail(email)){
+            updateAlert((prevState) => {
+                return {
+                    ...prevState,
+                    type: "BAD_EMAIL"
+                }
+            });
+        }
+        else {
+            // Perform signup operation...
+            const information = JSON.stringify({
+                firstName, lastName, age, email, password, address, gender
+            });
 
-        const options = {
-            method: 'POST',
-            body : information,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-        };
+            const options = {
+                method: 'POST',
+                body : information,
+                headers: {
+                    'content-type': 'application/json'
+                }
+            };
 
-        try {
-            const valueOfRequest = await axios.post("http://localhost:5001/signup", options);
+            // Prepare sign up request with async/await and update state alerts
+            try {
+                const valueOfRequest = await axios.post("http://localhost:5001/signup", options);
 
-            if (valueOfRequest.status === 201) {
-                updateAlert((prevState) => {
-                    return {
-                        ... prevState,
-                        type: "SIGN_UP_SUCCESS"
-                    }
-                });
-            }
-            else {
+                if (valueOfRequest.status === 201) {
+                    updateAlert((prevState) => {
+                        return {
+                            ... prevState,
+                            type: "SIGN_UP_SUCCESS"
+                        }
+                    });
+                }
+                else {
+                    updateAlert((prevState) => {
+                        return {
+                            ... prevState,
+                            type: "SIGN_UP_FAILURE"
+                        }
+                    });
+                }
+            }        
+            catch (err) {
                 updateAlert((prevState) => {
                     return {
                         ... prevState,
@@ -63,14 +84,6 @@ const Signup = () => {
                     }
                 });
             }
-        }        
-        catch (err) {
-            updateAlert((prevState) => {
-                return {
-                    ... prevState,
-                    type: "SIGN_UP_FAILURE"
-                }
-            });
         }
     }
 

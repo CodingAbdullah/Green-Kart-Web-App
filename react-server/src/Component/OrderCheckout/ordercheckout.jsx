@@ -107,10 +107,10 @@ const OrderCheckout = () => {
 
     return (
         <div className="table-form">
-            { alert !== '' ? <Alert alertType={ alert } /> : null }
             <div class="container table-container">
                 <div>
                     <h5 className="inventory-title-checkout">Your List of Items for Checkout</h5>
+                    { alert !== '' ? <Alert alertType={ alert } /> : null }
                     { table }
                 </div>
             </div>

@@ -6,6 +6,14 @@ const Alert = (props) => {
     let type = "";
 
     switch (alertType) {
+        case "BAD_EMAIL":
+            message = "Invalid email address standard";
+            type = 'danger';
+            break;
+        case "EMPTY_HISTORY":
+            message = "No transactions have taken place under this profile";
+            type = 'warning';
+            break;
         case "SIGN_UP_FAILURE":
             message = "Sign up was unsuccessful";
             type = "danger";
@@ -19,7 +27,7 @@ const Alert = (props) => {
             type = "danger";
             break;
         case "GOOD_CHECKOUT":
-            message = "Items have been checkout!";
+            message = "Items have been checkedout!";
             type = 'success';
             break;
         case "BAD_CHECKOUT":

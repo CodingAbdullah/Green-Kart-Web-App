@@ -96,11 +96,11 @@ const ResetPasswordPage = () => {
                 {
                     isEmailVerified ? 
                         <>
-                            <h6 class="sign-form-title">Verification Code & New Password</h6>
+                            <h6 style={ styles.link } class="sign-form-title">Verification Code & New Password</h6>
                             <form class="sign-form" onSubmit={ resetHandler }>
                                 <div class="form-group">
-                                    <input style={{ marginTop: '0.6rem' }} disabled={ isVerificationCodeVerified } onChange={ e => updateVerificationCode(e.target.value) } name="text" type="text" class="form-control" placeholder="Verification Code" />
-                                    <input style={{ marginTop: '0.6rem' }} disabled={ isVerificationCodeVerified } onChange={ e => updatePassword(e.target.value) } name="password" type="password" class="form-control" placeholder="New Password" />
+                                    <input style={{ marginTop: '0.6rem' }} disabled={ isVerificationCodeVerified } onChange={ e => updateVerificationCode(e.target.value) } name="text" type="text" class="form-control" placeholder="Enter Verification Code" />
+                                    <input style={{ marginTop: '0.6rem' }} disabled={ isVerificationCodeVerified } onChange={ e => updatePassword(e.target.value) } name="password" type="password" class="form-control" placeholder="Enter New Password" />
                                 </div>
                                 <button style={ styles.updateButton } disabled={ isVerificationCodeVerified } type="submit" class="btn btn-success">Reset Password</button>
                             </form>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import Alert from '../Alert/alert';
 import './orderhistory.css';
 
 const OrderHistory = () =>  {
@@ -9,7 +10,8 @@ const OrderHistory = () =>  {
     const userSelector = useSelector(state => state.auth.user);
 
     const [orders, updateOrderHistory] = useState({
-        orderHistory: []
+        orderHistory: [],
+        isLoaded: false
     });
 
     useEffect(() => {
@@ -32,7 +34,8 @@ const OrderHistory = () =>  {
                 updateOrderHistory(prevState => {
                     return {
                         ...prevState,
-                        orderHistory: response.data.orders
+                        orderHistory: response.data.orders,
+                        isLoaded: true
                     }
                 });
             })
@@ -44,57 +47,79 @@ const OrderHistory = () =>  {
         navigate("/");
     }
 
-    return (
-        <div>
-            <h5 className="inventory-title-checkout">User Order History</h5>
-            <table class="table large-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Order Description</th>
-                        <th>Total Cost</th>
-                    </tr>
-                </thead>
-                { 
-                    orders.orderHistory[0] && orders.orderHistory.map(item => {
-                        // Use the timestamp attribute assigned to model instead of custom date attribute
-                        let day = item.createdAt.split("T")[0];
-                        let time = item.createdAt.split("T")[1].split(":")
+    if ( orders.orderHistory.length === 0 && orders.isLoaded ){
+        return (
+            <div>
+                <h5 className="inventory-title-checkout">User Order History</h5>
+                <table class="table large-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Order Description</th>
+                            <th>Total Cost</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class='container'>
+                    <Alert alertType="EMPTY_HISTORY" />
+                </div>
+                <button class="btn btn-success order-history-button" onClick={ homeHandler }>Go Home</button>
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                <h5 className="inventory-title-checkout">User Order History</h5>
+                <table class="table large-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Order Description</th>
+                            <th>Total Cost</th>
+                        </tr>
+                    </thead>
+                    { 
+                        orders.orderHistory[0] && orders.orderHistory.map(item => {
+                            // Use the timestamp attribute assigned to model instead of custom date attribute
+                            let day = item.createdAt.split("T")[0];
+                            let time = item.createdAt.split("T")[1].split(":")
 
-                        return (
-                            <tr>
-                                <td>{ day + " " + time[0] + ":" + time[1] + "-UTC" }</td>
-                                <table class="table inner-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price/Item</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            Object.keys(item.order_description).map(food => {
-                                                let price = "$" + item.order_description[food].price
-                                                return (
-                                                    <tr>
-                                                        <td>{ item.order_description[food].name }</td>
-                                                        <td>{ item.order_description[food].quantity }</td>
-                                                        <td>{ price }</td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
-                                <td>{ "$" + item.total_cost }</td>
-                            </tr>
-                        )}
-                )}
-            </table>
-            <button class="btn btn-success order-history-button" onClick={ homeHandler }>Go Home</button>
-        </div>
-    )
+                            return (
+                                <tr>
+                                    <td>{ day + " " + time[0] + ":" + time[1] + "-UTC" }</td>
+                                    <table class="table inner-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price/Item</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                Object.keys(item.order_description).map(food => {
+                                                    let price = "$" + item.order_description[food].price
+                                                    return (
+                                                        <tr>
+                                                            <td>{ item.order_description[food].name }</td>
+                                                            <td>{ item.order_description[food].quantity }</td>
+                                                            <td>{ price }</td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <td>{ "$" + item.total_cost }</td>
+                                </tr>
+                            )}
+                    )}
+                </table>
+                <button class="btn btn-success order-history-button" onClick={ homeHandler }>Go Home</button>
+            </div>
+        )
+    }
 }
 
 export default OrderHistory;
