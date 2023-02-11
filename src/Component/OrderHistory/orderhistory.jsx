@@ -29,7 +29,7 @@ const OrderHistory = () =>  {
             };
     
             // Retrieve user order history set headers
-            axios.post("http://localhost:5001/order-history", options)
+            axios.post("https://18.222.150.248.nip.io/order-history", options)
             .then(response => {
                 updateOrderHistory(prevState => {
                     return {

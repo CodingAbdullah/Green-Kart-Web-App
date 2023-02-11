@@ -13,7 +13,7 @@ const login = async (state) => {
     }
     
     // Obtain the response and check if value is acceptable
-    const response = await axios.post('http://localhost:5001/login', options)
+    const response = await axios.post('https://18.222.150.248.nip.io/login', options)
 
     localStorage.setItem('user', JSON.stringify(response.data));
     return response.data

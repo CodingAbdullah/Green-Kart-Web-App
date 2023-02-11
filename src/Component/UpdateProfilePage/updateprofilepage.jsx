@@ -47,7 +47,7 @@ const UpdateProfilePage = () => {
         }
 
         // Forward request to update user profile
-        axios.post("http://localhost:5001/update-user-information", options)
+        axios.post("https://18.222.150.248.nip.io/update-user-information", options)
         .then(() => {
             updateAlert('GOOD_UPDATE');
         })

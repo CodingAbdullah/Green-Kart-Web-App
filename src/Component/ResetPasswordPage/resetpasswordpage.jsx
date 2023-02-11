@@ -44,7 +44,7 @@ const ResetPasswordPage = () => {
             }
 
             // Prepare request for adding email token to database
-            axios.post('http://localhost:5001/add-email-token', options)
+            axios.post('https://18.222.150.248.nip.io/add-email-token', options)
             .then(() => {
                 updateIsEmailVerified(true);
                 updateResetAlert("VERIFICATION_CODE_SENT");
@@ -68,7 +68,7 @@ const ResetPasswordPage = () => {
         }
 
         // Prepare request to update user password with user verification code and updated password
-        axios.post("http://localhost:5001/update-user-password", options)
+        axios.post("https://18.222.150.248.nip.io/update-user-password", options)
         .then((response) => {
             // If user has entered the correct verification code, password was reset and alerts should be present
             if ( response.data.isExpired ) {

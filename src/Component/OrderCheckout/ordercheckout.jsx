@@ -96,7 +96,7 @@ const OrderCheckout = () => {
         }
 
         // Order using the cart items requested by User
-        axios.post("http://localhost:5001/order-checkout", options)
+        axios.post("https://18.222.150.248.nip.io/order-checkout", options)
         .then(() => {
             updateAlert("GOOD_CHECKOUT");
         })

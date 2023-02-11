@@ -57,7 +57,7 @@ const Signup = () => {
 
             // Prepare sign up request with async/await and update state alerts
             try {
-                const valueOfRequest = await axios.post("http://localhost:5001/signup", options);
+                const valueOfRequest = await axios.post("https://18.222.150.248.nip.io/signup", options);
 
                 if (valueOfRequest.status === 201) {
                     updateAlert((prevState) => {
