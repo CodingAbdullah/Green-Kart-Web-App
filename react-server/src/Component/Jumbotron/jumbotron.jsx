@@ -3,7 +3,7 @@ import './jumbotron.css';
 import homePic from '../../assets/greenies/spinach.jpg';
 
 const Jumbotron = () => {
-
+    // Main theme for home page
     return (
         <div className="jumbo">
             <h1 className="cart-title">Welcome to <i className="italicK">G</i>reen <i className="italicK">K</i>art</h1>

@@ -27,7 +27,7 @@ const Alert = (props) => {
             type = "danger";
             break;
         case "GOOD_CHECKOUT":
-            message = "Items have been checkedout!";
+            message = "Items have been checked out!";
             type = 'success';
             break;
         case "BAD_CHECKOUT":
