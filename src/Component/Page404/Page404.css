@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+
+.page404-form {
+    margin-top: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+.page404-container {
+    margin-top: 2.5rem;
+    width: 50%;
+    background-color: lightgreen;
+    border: 5px solid green;
+}
+
+.page404-container:hover {
+    background-color: greenyellow;
+}
+
+.form-title {
+    font-family: 'Permanent Marker', 'cursive';
+    color: black;
+}
