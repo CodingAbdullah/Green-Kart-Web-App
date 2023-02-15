@@ -12,10 +12,13 @@ const Navbar = () => {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li className="nav-item dropdown">
-                        <a className="nav-link" href="/order-history">Order History</a>
+                        <a className="nav-link" href="/about">About</a>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link" href="/product-pricing">Place Order</a>
+                    </li>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link" href="/order-history">Order History</a>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link" href="/update-profile-info">Update Account Profile</a>
@@ -31,6 +34,9 @@ const Navbar = () => {
         navBarRendering = (
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <li className="nav-item dropdown">
+                        <a className="nav-link" href="/about">About</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
